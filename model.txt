@@ -1,0 +1,18 @@
+Progetto Programmazione III
+---------------------------
+Server
++ synchronized receive()
++ File saveEmails()
++ File log()
++ String sendErrors()
+---------------------------
+Client
+Email(int ID, String emailMittente, String emailDestinatario, String argomento, String testo, Date data)
+
++ boolean sendEmail(ArrayList<String> email)
++ boolean deleteEmail(String email)
++ boolean updateEmails()
++ boolean readEmail()
++ boolean forwardEmail()
++ boolean replyEmail()
++ boolean replyAllEmail()
