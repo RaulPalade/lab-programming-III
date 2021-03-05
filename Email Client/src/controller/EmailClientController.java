@@ -18,6 +18,9 @@ public class EmailClientController {
     private Label email;
 
     @FXML
+    private Label statoServer;
+
+    @FXML
     private Button aggiorna;
 
     @FXML
