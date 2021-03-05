@@ -32,20 +32,24 @@ public class LeggiEmailController {
     @FXML
     private Label testoEmail;
 
-
+    @FXML
     public void eliminaEmail(ActionEvent actionEvent) {
 
     }
 
+    @FXML
     public void rispondiEmail(ActionEvent actionEvent) {
 
     }
 
+    @FXML
     public void rispondiEmailATutti(ActionEvent actionEvent) {
 
     }
 
+    @FXML
     public void inoltraEmail(ActionEvent actionEvent) {
 
     }
+
 }

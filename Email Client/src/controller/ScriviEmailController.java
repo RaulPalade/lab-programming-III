@@ -32,10 +32,12 @@ public class ScriviEmailController {
     @FXML
     private TextArea testoEmail;
 
+    @FXML
     public void eliminaMailCorrente(ActionEvent actionEvent) {
 
     }
 
+    @FXML
     public void inviaEmail(ActionEvent actionEvent) {
 
     }

@@ -32,15 +32,17 @@ public class EmailClientController {
     @FXML
     private Pane pannelloVuoto;
 
-
+    @FXML
     public void aggiornaListaEmail(ActionEvent actionEvent) {
 
     }
 
+    @FXML
     public void eliminaEmail(ActionEvent actionEvent) {
 
     }
 
+    @FXML
     public void scriviNuovaEmail(ActionEvent actionEvent) {
 
     }
