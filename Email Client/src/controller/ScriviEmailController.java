@@ -2,8 +2,12 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
+import model.DataModel;
+
 
 /**
  * @author Raul Palade
@@ -33,12 +37,41 @@ public class ScriviEmailController {
     private TextArea testoEmail;
 
     @FXML
+    private HBox comandi;
+
+    private DataModel dataModel;
+
+    public void initModel(DataModel dataModel) {
+        this.dataModel = dataModel;
+    }
+
+    @FXML
     public void eliminaMailCorrente(ActionEvent actionEvent) {
 
     }
 
     @FXML
-    public void inviaEmail(ActionEvent actionEvent) {
+    public void inviaEmail(ActionEvent actionEvent) throws InterruptedException {
+        if (destinatario.getText().isBlank() || cc.getText().isBlank() || ccn.getText().isBlank() || oggetto.getText().isBlank()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Compilare tutti i campi in rosso");
+            alert.show();
 
+            if (destinatario.getText().isBlank()) {
+                destinatario.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+            }
+
+            if (cc.getText().isBlank()) {
+                cc.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+            }
+
+            if (ccn.getText().isBlank()) {
+                ccn.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+            }
+
+            if (oggetto.getText().isBlank()) {
+                oggetto.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
+            }
+        }
     }
+
 }

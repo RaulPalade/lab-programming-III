@@ -27,6 +27,11 @@ public class Email {
         setEmailDate(emailDate);
     }
 
+    public Email(String emailSender, String emailDate) {
+        setEmailSender(emailSender);
+        setEmailDate(emailDate);
+    }
+
     public int getEmailID() {
         return emailID.get();
     }

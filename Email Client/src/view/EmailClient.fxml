@@ -27,7 +27,7 @@
                 </Label>
             </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="900.0">
+        <HBox fx:id="pannelloSinistra" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="900.0">
             <children>
                 <Button fx:id="aggiorna" mnemonicParsing="false" onAction="#aggiornaListaEmail" prefHeight="35.0"
                         prefWidth="135.0" text="AGGIORNA">
