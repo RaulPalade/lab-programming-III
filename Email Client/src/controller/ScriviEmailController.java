@@ -3,11 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.HBox;
 import model.DataModel;
-
 
 /**
  * @author Raul Palade
@@ -36,9 +32,6 @@ public class ScriviEmailController {
     @FXML
     private TextArea testoEmail;
 
-    @FXML
-    private HBox comandi;
-
     private DataModel dataModel;
 
     public void initModel(DataModel dataModel) {
@@ -47,31 +40,47 @@ public class ScriviEmailController {
 
     @FXML
     public void eliminaMailCorrente(ActionEvent actionEvent) {
+        ButtonType si = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, null, si, no);
+        alert.setHeaderText("Sei sicuro di cancellare questa email?");
+        alert.show();
+        alert.setOnCloseRequest(event -> {
+            // TODO (1): Aggiungere il pulsante nuova email di EmailClient.fxml
+        });
 
     }
 
     @FXML
     public void inviaEmail(ActionEvent actionEvent) throws InterruptedException {
-        if (destinatario.getText().isBlank() || cc.getText().isBlank() || ccn.getText().isBlank() || oggetto.getText().isBlank()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Compilare tutti i campi in rosso");
+        if (checkForm()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Compilare tutti i campi in rosso");
             alert.show();
-
-            if (destinatario.getText().isBlank()) {
-                destinatario.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
-            }
-
-            if (cc.getText().isBlank()) {
-                cc.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
-            }
-
-            if (ccn.getText().isBlank()) {
-                ccn.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
-            }
-
-            if (oggetto.getText().isBlank()) {
-                oggetto.setStyle("-fx-text-box-border: red; -fx-focus-color: red;");
-            }
         }
     }
 
+    private boolean checkForm() {
+        boolean completo = false;
+        TextArea[] form = {destinatario, cc, ccn, oggetto, testoEmail};
+
+        for (TextArea t : form) {
+            if (t.getText().isBlank()) {
+                t.setStyle("-fx-text-box-border: #ff0033; -fx-focus-color: #ff0033;");
+                completo = true;
+            }
+        }
+
+        return completo;
+    }
+
+    @FXML
+    private void clear() {
+        TextArea[] form = {destinatario, cc, ccn, oggetto, testoEmail};
+        for (TextArea t : form) {
+            if (t.isFocused()) {
+                t.setStyle("-fx-text-box-border: #d0d0d0; -fx-focus-color: #d0d0d0;");
+            }
+        }
+    }
 }

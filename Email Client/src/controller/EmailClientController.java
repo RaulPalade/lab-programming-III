@@ -24,7 +24,13 @@ import java.util.ResourceBundle;
 public class EmailClientController implements Initializable {
 
     @FXML
-    public HBox pannelloSinistra;
+    public HBox topHBox;
+
+    @FXML
+    public HBox centerHBox;
+
+    @FXML
+    public HBox bottomHBox;
 
     @FXML
     private Label email;
@@ -73,7 +79,7 @@ public class EmailClientController implements Initializable {
     public void scriviNuovaEmail(ActionEvent actionEvent) throws IOException {
         Pane scriviEmail = FXMLLoader.load(getClass().getResource("/view/ScriviEmail.fxml"));
         pannelloVuoto.getChildren().add(scriviEmail);
-        pannelloSinistra.getChildren().remove(nuovaEmail);
+        centerHBox.getChildren().remove(nuovaEmail);
 
         /*FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/ScriviEmail.fxml"));
