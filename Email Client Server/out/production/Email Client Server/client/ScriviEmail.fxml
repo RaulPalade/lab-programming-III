@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ScriviEmailController">
+    <children>
+        <HBox prefHeight="35.0" prefWidth="200.0">
+            <children>
+                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="35.0" prefWidth="85.0" text="Destinatario:">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin>
+                </Label>
+                <TextArea fx:id="destinatario" onMouseClicked="#clear" prefHeight="44.0" prefWidth="495.0">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </TextArea>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+        <HBox prefHeight="35.0" prefWidth="200.0">
+            <children>
+                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="35.0" prefWidth="85.0" text="Oggetto:">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin>
+                </Label>
+                <TextArea fx:id="oggetto" onMouseClicked="#clear" prefHeight="44.0" prefWidth="495.0" />
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+        <HBox fx:id="comandi" alignment="CENTER" prefHeight="35.0" prefWidth="200.0">
+            <children>
+                <Button fx:id="elimina" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#eliminaMailCorrente" prefHeight="30.0" prefWidth="100.0" text="ELIMINA  " textAlignment="CENTER">
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                    <HBox.margin>
+                        <Insets right="50.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+                <Button fx:id="invia" mnemonicParsing="false" onAction="#handleInviaEmail" prefHeight="30.0" prefWidth="100.0" text="INVIA" textAlignment="CENTER">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+            </children>
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </HBox>
+        <TextArea fx:id="testoEmail" prefHeight="340.0" prefWidth="579.0">
+            <VBox.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </VBox.margin>
+        </TextArea>
+    </children>
+</VBox>
