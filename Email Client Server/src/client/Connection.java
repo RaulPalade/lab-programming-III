@@ -5,9 +5,12 @@ import common.Email;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+
+// TODO (2): Rimuovere il codice duplicato
+// TODO (3): Creare una classe con variabili globali per ip, porta e operazioni tra client e server
+// TODO (4): Creare per generazione utenti
 
 /**
  * @author Raul Palade
@@ -15,7 +18,6 @@ import java.util.ArrayList;
  * @date 16/03/2021
  */
 public class Connection {
-    private final int PORT = 10000;
     private final MailBox mailBox;
     private Socket socket;
     private ObjectOutputStream out;
@@ -23,12 +25,15 @@ public class Connection {
 
     public Connection(MailBox mailBox) {
         this.mailBox = mailBox;
+        socket = null;
+        out = null;
+        in = null;
         try {
-            socket = new Socket(InetAddress.getLoopbackAddress(), PORT);
+            socket = new Socket("127.0.0.1", 7777);
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -58,11 +63,13 @@ public class Connection {
                 out.writeObject(email);
                 out.writeObject(mailBox.getUsername());
                 out.flush();
-                loginCorrect = in.readBoolean();
+                System.out.println("LOGIN IN CORSO");
+                loginCorrect = (boolean) in.readObject();
+                System.out.println("LOGIN IN CORSO");
             } else {
                 return false;
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
@@ -85,6 +92,39 @@ public class Connection {
         }
     }
 
+    public boolean controlUsername(String username) {
+        boolean trovato = false;
+        try {
+            out.writeObject("CONTROL_USERNAME");
+            out.writeObject(username);
+            out.writeObject(mailBox.getUsername());
+            out.flush();
+            trovato = (boolean) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return trovato;
+    }
+
+    public String getEmailId() {
+        System.out.println(mailBox.getUsername());
+        int id = -1;
+        try {
+            out.writeObject("GET_EMAIL_ID");
+            out.writeObject(mailBox.getUsername());
+            id = (int) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return String.valueOf(id);
+    }
+
     public void sendEmail(Email email) {
         try {
             out.writeObject("SEND_EMAIL");
@@ -102,12 +142,12 @@ public class Connection {
         boolean deleted = false;
         try {
             if (out != null) {
-                out.writeObject("DELETE");
+                out.writeObject("DELETE_EMAIL");
                 out.writeObject(mailBox.getUsername());
                 out.writeObject(email);
-                deleted = in.readBoolean();
+                deleted = (boolean) in.readObject();
             }
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
@@ -123,7 +163,7 @@ public class Connection {
                 out.writeObject(mailBox.getUsername());
                 out.writeObject(lastId);
                 out.flush();
-                int controllo = in.readInt();
+                int controllo = (int) in.readObject();
                 ArrayList<Email> receivedEmails = new ArrayList<>();
                 while (controllo-- != 0) {
                     Object obj = in.readObject();
@@ -134,7 +174,7 @@ public class Connection {
                 }
                 mailBox.addReceivedEmails(receivedEmails);
             }
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
@@ -148,7 +188,7 @@ public class Connection {
                 out.writeObject(mailBox.getUsername());
                 out.writeObject(lastId);
                 out.flush();
-                int controllo = in.readInt();
+                int controllo = (int) in.readObject();
                 ArrayList<Email> sendedEmails = new ArrayList<>();
                 while (controllo-- != 0) {
                     Object obj = in.readObject();

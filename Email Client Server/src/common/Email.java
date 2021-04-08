@@ -4,9 +4,14 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
 
 /**
  * @author Raul Palade
@@ -14,32 +19,32 @@ import java.io.Serializable;
  * @date 29/03/2021
  */
 public class Email implements Serializable {
-    private final StringProperty id = new SimpleStringProperty();
-    private final StringProperty sender = new SimpleStringProperty();
-    private final ListProperty<String> addesses = new SimpleListProperty<>();
-    private final StringProperty subject = new SimpleStringProperty();
-    private final StringProperty message = new SimpleStringProperty();
-    private final StringProperty date = new SimpleStringProperty();
+    private StringProperty ID = new SimpleStringProperty();
+    private StringProperty sender = new SimpleStringProperty();
+    private ListProperty<String> addresses = new SimpleListProperty<>();
+    private StringProperty subject = new SimpleStringProperty();
+    private StringProperty message = new SimpleStringProperty();
+    private StringProperty date = new SimpleStringProperty();
 
-    public Email(String id, String sender, ListProperty<String> addesses, String subject, String message, String date) {
-        this.id.set(id);
+    public Email(String ID, String sender, ObservableList<String> addresses, String subject, String message, String date) {
+        this.ID.set(ID);
         this.sender.set(sender);
-        this.addesses.set(addesses);
+        this.addresses.set(addresses);
         this.subject.set(subject);
         this.message.set(message);
         this.date.set(date);
     }
 
-    public String getId() {
-        return id.get();
+    public String getID() {
+        return ID.get();
     }
 
-    public void setId(String id) {
-        this.id.set(id);
+    public void setID(String ID) {
+        this.ID.set(ID);
     }
 
-    public StringProperty idProperty() {
-        return id;
+    public StringProperty IDProperty() {
+        return ID;
     }
 
     public String getSender() {
@@ -54,16 +59,16 @@ public class Email implements Serializable {
         return sender;
     }
 
-    public ObservableList<String> getAddesses() {
-        return addesses.get();
+    public ObservableList<String> getAddresses() {
+        return addresses.get();
     }
 
-    public void setAddesses(ObservableList<String> addesses) {
-        this.addesses.set(addesses);
+    public void setAddresses(ObservableList<String> addresses) {
+        this.addresses.set(addresses);
     }
 
-    public ListProperty<String> addessesProperty() {
-        return addesses;
+    public ListProperty<String> addressesProperty() {
+        return addresses;
     }
 
     public String getSubject() {
@@ -100,5 +105,81 @@ public class Email implements Serializable {
 
     public StringProperty dateProperty() {
         return date;
+    }
+
+    public String getStringAddresses() {
+        String s = "";
+        Iterator<String> it = addresses.iterator();
+        while (it.hasNext()) {
+            s = s + it.next();
+            if (it.hasNext()) {
+                s = s + " ,";
+            }
+        }
+
+        return s;
+    }
+
+    private void writeObject(ObjectOutputStream out) {
+        try {
+            out.writeObject(getID());
+            out.writeObject(getSender());
+            writeListProp(out);
+            out.writeObject(getSubject());
+            out.writeObject(getMessage());
+            out.writeObject(getDate());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readObject(ObjectInputStream in) {
+        try {
+            ID = new SimpleStringProperty((String) in.readObject());
+            sender = new SimpleStringProperty((String) in.readObject());
+            addresses = new SimpleListProperty<>(readListProp(in));
+            subject = new SimpleStringProperty((String) in.readObject());
+            message = new SimpleStringProperty((String) in.readObject());
+            date = new SimpleStringProperty((String) in.readObject());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ListProperty<String> readListProp(ObjectInputStream in) {
+        ListProperty<String> listProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
+        try {
+            int loop = in.readInt();
+            for (int i = 0; i < loop; i++) {
+                listProperty.add((String) in.readObject());
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return listProperty;
+    }
+
+    private void writeListProp(ObjectOutputStream out) {
+        try {
+            out.writeInt(addresses.size());
+            for (String elt : addresses.getValue()) {
+                out.writeObject(elt);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Email{" +
+                "ID=" + ID +
+                ", sender=" + sender +
+                ", addresses=" + addresses +
+                ", subject=" + subject +
+                ", message=" + message +
+                ", date=" + date +
+                '}';
     }
 }

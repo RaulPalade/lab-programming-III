@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0"
-      prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="610.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1"
       fx:controller="client.EmailClientController">
     <children>
         <GridPane alignment="CENTER">
@@ -32,7 +23,8 @@
             <children>
                 <Label fx:id="email" text="Email"/>
                 <Label fx:id="statoServer" text="Server status" GridPane.columnIndex="1"/>
-                <Button mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="80.0" text="LOGOUT"
+                <Button mnemonicParsing="false" fx:id="logout" onAction="#logout" prefHeight="30.0" prefWidth="80.0"
+                        text="LOGOUT"
                         GridPane.columnIndex="2"/>
             </children>
         </GridPane>
@@ -66,7 +58,7 @@
                 <Insets top="10.0"/>
             </VBox.margin>
             <children>
-                <TabPane>
+                <TabPane fx:id="tabPane">
                     <tabs>
                         <Tab text="Posta in Arrivo" fx:id="postaInArrivo">
                             <content>

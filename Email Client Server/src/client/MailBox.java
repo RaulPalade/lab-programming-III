@@ -16,9 +16,9 @@ import java.util.ArrayList;
  */
 public class MailBox {
     private final transient String username;
-    private final ObservableList<common.Email> emailListSended;
-    private final ObservableList<common.Email> emailListReceived;
-    private final ObjectProperty<common.Email> currentEmail = new SimpleObjectProperty<>(null);
+    private final transient ObservableList<Email> emailListSended;
+    private final transient ObservableList<Email> emailListReceived;
+    private final ObjectProperty<Email> currentEmail = new SimpleObjectProperty<>(null);
     private int lastIdReceived;
     private int lastIdSend;
 
@@ -34,11 +34,11 @@ public class MailBox {
         return username;
     }
 
-    public ObservableList<common.Email> getEmailListSended() {
+    public ObservableList<Email> getEmailListSended() {
         return emailListSended;
     }
 
-    public ObservableList<common.Email> getEmailListReceived() {
+    public ObservableList<Email> getEmailListReceived() {
         return emailListReceived;
     }
 
@@ -50,7 +50,7 @@ public class MailBox {
         return lastIdSend;
     }
 
-    public ObjectProperty<common.Email> currentEmailProperty() {
+    public ObjectProperty<Email> currentEmailProperty() {
         return currentEmail;
     }
 
@@ -58,20 +58,20 @@ public class MailBox {
         return currentEmailProperty().get();
     }
 
-    public final void setCurrentEmail(common.Email email) {
+    public final void setCurrentEmail(Email email) {
         currentEmailProperty().set(email);
     }
 
-    public void addSendedEmails(ArrayList<common.Email> emails) {
+    public void addSendedEmails(ArrayList<Email> emails) {
         if (!emails.isEmpty()) {
-            lastIdSend = Integer.parseInt(emails.get(emails.size() - 1).getId());
+            lastIdSend = Integer.parseInt(emails.get(emails.size() - 1).getID());
             emailListSended.addAll(emails);
         }
     }
 
     public void addReceivedEmails(ArrayList<Email> emails) {
         if (!emails.isEmpty()) {
-            lastIdReceived = Integer.parseInt(emails.get(emails.size() - 1).getId());
+            lastIdReceived = Integer.parseInt(emails.get(emails.size() - 1).getID());
             Platform.runLater(() -> emailListReceived.addAll(emails));
         }
     }

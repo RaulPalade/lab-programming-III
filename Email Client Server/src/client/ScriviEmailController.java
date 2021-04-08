@@ -1,11 +1,15 @@
 package client;
 
+import common.Email;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.GregorianCalendar;
 
 /**
  * @author Raul Palade
@@ -13,8 +17,6 @@ import java.util.Arrays;
  * @date 05/03/2021
  */
 public class ScriviEmailController {
-    public static int id = 0;
-
     @FXML
     private TextArea destinatario;
 
@@ -30,17 +32,25 @@ public class ScriviEmailController {
     @FXML
     private TextArea testoEmail;
 
+    private final ButtonType si = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
+    private final ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+    private MailBox mailBox;
+
+    public void initModel(MailBox mailBox) {
+        if (this.mailBox != null) {
+            throw new IllegalStateException("Model can only be initialized once");
+        }
+        this.mailBox = mailBox;
+    }
+
     @FXML
     public void eliminaMailCorrente(ActionEvent actionEvent) {
-        ButtonType si = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
-        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, null, si, no);
         alert.setHeaderText("Sei sicuro di cancellare questa email?");
         alert.show();
         alert.setOnCloseRequest(event -> {
             // TODO (1): Aggiungere il pulsante nuova email di EmailClient.fxml
         });
-
     }
 
     @FXML
@@ -49,15 +59,33 @@ public class ScriviEmailController {
         ArrayList<String> listaEmail = new ArrayList<>(Arrays.asList(emailSplit));
         Alert alert;
 
-        /*if (formCompilato()) {
+        if (formCompilato()) {
             if (emailValide(listaEmail)) {
-               *//* boolean mailInviata = dataModel.richiediInvioEmail(listaEmail, oggetto.getText(), testoEmail.getText());*//*
-                if (mailInviata) {
+                Connection connection = new Connection(mailBox);
+                String id = connection.getEmailId();
+                System.out.println("ID PER NUOVA EMAIL: " + id);
+                String mittente = mailBox.getUsername();
+                ObservableList<String> list = FXCollections.observableArrayList();
+                list.addAll(emailSplit);
+                boolean correct = true;
+                for (String s : list) {
+                    connection = new Connection(mailBox);
+                    if (!connection.controlUsername(s)) {
+                        correct = false;
+                    }
+                }
+                String oggettoEmail = oggetto.getText();
+                String messaggioEmail = testoEmail.getText();
+                GregorianCalendar date = new GregorianCalendar();
+                if (correct) {
+                    connection = new Connection(mailBox);
+                    Email email = new Email(id, mittente, list, oggettoEmail, messaggioEmail, date.getTime().toString());
+                    connection.sendEmail(email);
                     alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Email Inviata");
+                    alert.setHeaderText("Email inviata");
                 } else {
-                    alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setHeaderText("Email non inviata");
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Email inesistenti");
                 }
             } else {
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -67,7 +95,7 @@ public class ScriviEmailController {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Compilare tutti i campi in rosso correttamente");
         }
-        alert.show();*/
+        alert.show();
     }
 
     private boolean formCompilato() {

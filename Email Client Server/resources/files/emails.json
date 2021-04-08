@@ -1,0 +1,12 @@
+[
+  {
+    "ID": "1",
+    "sender": "raul.palade@edu.unito.it",
+    "addresses": [
+      "raul@mail.com"
+    ],
+    "subject": "MAIL2",
+    "message": "ciao",
+    "date": "Thu Apr 08 16:01:22 CEST 2021"
+  }
+]

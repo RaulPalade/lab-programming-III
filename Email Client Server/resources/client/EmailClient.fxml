@@ -23,7 +23,8 @@
             <children>
                 <Label fx:id="email" text="Email"/>
                 <Label fx:id="statoServer" text="Server status" GridPane.columnIndex="1"/>
-                <Button mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="80.0" text="LOGOUT"
+                <Button mnemonicParsing="false" fx:id="logout" onAction="#logout" prefHeight="30.0" prefWidth="80.0"
+                        text="LOGOUT"
                         GridPane.columnIndex="2"/>
             </children>
         </GridPane>
@@ -57,7 +58,7 @@
                 <Insets top="10.0"/>
             </VBox.margin>
             <children>
-                <TabPane>
+                <TabPane fx:id="tabPane">
                     <tabs>
                         <Tab text="Posta in Arrivo" fx:id="postaInArrivo">
                             <content>
