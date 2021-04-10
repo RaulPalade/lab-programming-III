@@ -138,14 +138,14 @@ public class Connection {
         }
     }
 
-    public boolean deleteEmail(Email email) {
-        boolean deleted = false;
+    public String deleteEmail(Email email) {
+        String message = "";
         try {
             if (out != null) {
                 out.writeObject("DELETE_EMAIL");
                 out.writeObject(mailBox.getUsername());
                 out.writeObject(email);
-                deleted = (boolean) in.readObject();
+                message = (String) in.readObject();
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -153,7 +153,7 @@ public class Connection {
             closeConnection();
         }
 
-        return deleted;
+        return message;
     }
 
     public void loadReceivedEmails(int lastId) {

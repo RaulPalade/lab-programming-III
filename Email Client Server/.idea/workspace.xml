@@ -2,33 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Merget client and server application, implemented login in client side">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_hildan_fxgson_fx_gson_4_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/files/emails.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/files/users.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/DataModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/TestJSON.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/ThreadPoolServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Email Client Server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Email Client Server.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/Connection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/Connection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClient.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClientController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/LeggiEmail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/LeggiEmail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/LeggiEmailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/LeggiEmailController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmail.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmailController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/TestClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/TestClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/Utente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/Utils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/client/EmailClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/client/EmailClient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/server/EmailServer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/server/EmailServer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/client/LeggiEmail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/client/LeggiEmail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/client/ScriviEmail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/client/ScriviEmail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/files/emails.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/files/emails.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/EmailClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/EmailClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/LeggiEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LeggiEmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/MailBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/MailBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/ScriviEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ScriviEmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Email.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/EmailServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/EmailServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ServerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/TestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/TestServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +142,7 @@
       <recent name="C:\Users\raulp\Documents\Universita\Laurea Triennale\Anno 3\Programmazione III\progetto-programmazione-iii-2020-2021\Email Client Server\src\server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestServer">
+  <component name="RunManager" selected="Application.TestClient">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -261,8 +254,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestServer" />
         <item itemvalue="Application.TestClient" />
+        <item itemvalue="Application.TestServer" />
         <item itemvalue="Application.TestJSON" />
       </list>
     </recent_temporary>
@@ -287,7 +280,14 @@
       <workItem from="1617868460270" duration="2423000" />
       <workItem from="1617870911803" duration="1847000" />
       <workItem from="1617883740737" duration="3101000" />
-      <workItem from="1617889037442" duration="3229000" />
+      <workItem from="1617889037442" duration="3560000" />
+      <workItem from="1617952691155" duration="3782000" />
+      <workItem from="1617971757051" duration="6155000" />
+      <workItem from="1618040033285" duration="5187000" />
+      <workItem from="1618048953282" duration="3134000" />
+      <workItem from="1618056952042" duration="2558000" />
+      <workItem from="1618060167769" duration="5748000" />
+      <workItem from="1618065968715" duration="1735000" />
     </task>
     <task id="LOCAL-00001" summary="Merget client and server application, implemented login in client side">
       <created>1617368635529</created>
@@ -296,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617368635529</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implemented update emails, send email and logout">
+      <created>1617892699782</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1617892699782</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,13 +312,24 @@
   <component name="UpdateCopyrightCheckinHandler">
     <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <MESSAGE value="Merget client and server application, implemented login in client side" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merget client and server application, implemented login in client side" />
+    <MESSAGE value="Implemented update emails, send email and logout" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented update emails, send email and logout" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -321,10 +339,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="38" width="1089" height="786" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617890033670" />
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1617891335835">
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1618062279827">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617891335835" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618062279827" />
     <state x="498" y="226" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1617864642290">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -341,10 +359,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617889058699" />
-    <state x="103" y="0" key="CommitChangelistDialog2" timestamp="1617368634484">
+    <state x="103" y="0" key="CommitChangelistDialog2" timestamp="1617892698913">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="103" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617368634484" />
+    <state x="103" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617892698913" />
     <state x="564" y="282" key="DetectedRootsChooserDialog" timestamp="1617108304279">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -353,74 +371,78 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="153" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617780110944" />
-    <state width="1493" height="315" key="GridCell.Tab.0.bottom" timestamp="1617891428467">
+    <state width="1493" height="251" key="GridCell.Tab.0.bottom" timestamp="1618067573849">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="315" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617891428467" />
+    <state width="1493" height="251" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618067573849" />
     <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="315" key="GridCell.Tab.0.center" timestamp="1617891428467">
+    <state width="1493" height="251" key="GridCell.Tab.0.center" timestamp="1618067573849">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="315" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617891428467" />
+    <state width="1493" height="251" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618067573849" />
     <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="315" key="GridCell.Tab.0.left" timestamp="1617891428467">
+    <state width="1493" height="251" key="GridCell.Tab.0.left" timestamp="1618067573849">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="315" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617891428467" />
+    <state width="1493" height="251" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618067573849" />
     <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="315" key="GridCell.Tab.0.right" timestamp="1617891428467">
+    <state width="1493" height="251" key="GridCell.Tab.0.right" timestamp="1618067573849">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="315" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617891428467" />
+    <state width="1493" height="251" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618067573849" />
     <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1617808685168">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1618052269411">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269411" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1617808685167">
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1618052269411">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269411" />
     <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1617808685167">
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1618052269411">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269411" />
     <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1617808685168">
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1618052269411">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269411" />
     <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1617808685168">
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1618052269412">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269412" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1617808685168">
+    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1618052269412">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269412" />
     <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1617808685168">
+    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1618052269412">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269412" />
     <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1617808685168">
+    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1618052269412">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617803107137" />
+    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618052269412" />
     <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1617802302603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617802302603" />
-    <state x="344" y="145" key="Vcs.Push.Dialog.v2" timestamp="1617368645348">
+    <state x="517" y="325" key="VCS.ChangelistChooser" timestamp="1617892706021">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="344" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617368645348" />
+    <state x="517" y="325" key="VCS.ChangelistChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617892706021" />
+    <state x="344" y="145" key="Vcs.Push.Dialog.v2" timestamp="1617892708596">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="344" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617892708596" />
     <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1617786134276">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -433,10 +455,10 @@
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2161" y="-15" width="1134" height="812" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617886593058" />
-    <state x="499" y="173" key="extract.method.dialog" timestamp="1617110947218">
+    <state x="499" y="173" key="extract.method.dialog" timestamp="1618042286904">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="173" key="extract.method.dialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617110947218" />
+    <state x="499" y="173" key="extract.method.dialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618042286904" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1617454509402">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

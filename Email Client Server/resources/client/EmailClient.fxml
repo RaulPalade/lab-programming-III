@@ -23,9 +23,8 @@
             <children>
                 <Label fx:id="email" text="Email"/>
                 <Label fx:id="statoServer" text="Server status" GridPane.columnIndex="1"/>
-                <Button mnemonicParsing="false" fx:id="logout" onAction="#logout" prefHeight="30.0" prefWidth="80.0"
-                        text="LOGOUT"
-                        GridPane.columnIndex="2"/>
+                <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="80.0"
+                        text="LOGOUT" GridPane.columnIndex="2"/>
             </children>
         </GridPane>
         <HBox fx:id="centerHBox" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="900.0">
@@ -58,21 +57,22 @@
                 <Insets top="10.0"/>
             </VBox.margin>
             <children>
-                <TabPane fx:id="tabPane">
+                <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                        <Tab text="Posta in Arrivo" fx:id="postaInArrivo">
+                        <Tab fx:id="postaInArrivo" text="Posta in Arrivo">
                             <content>
-                                <ListView fx:id="listaEmailRicevute" prefHeight="500.0" prefWidth="300.0"/>
+                                <ListView fx:id="listaEmailRicevute" onMouseClicked="#loadReadEmailWindow"
+                                          prefHeight="500.0" prefWidth="300.0"/>
                             </content>
                         </Tab>
-                        <Tab text="Posta Inviata" fx:id="postaInviata">
+                        <Tab fx:id="postaInviata" text="Posta Inviata">
                             <content>
                                 <ListView fx:id="listaEmailInviate" prefHeight="500.0" prefWidth="300.0"/>
                             </content>
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Pane fx:id="pannelloVuoto" prefHeight="500.0" prefWidth="600.0"/>
+                <StackPane fx:id="pannelloVuoto" prefHeight="500.0" prefWidth="600.0"/>
             </children>
         </HBox>
     </children>

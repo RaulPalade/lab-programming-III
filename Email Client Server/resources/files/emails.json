@@ -1,12 +1,22 @@
 [
   {
-    "ID": "1",
-    "sender": "raul.palade@edu.unito.it",
+    "ID": "0",
+    "sender": "raul@mail.com",
     "addresses": [
       "raul@mail.com"
     ],
-    "subject": "MAIL2",
-    "message": "ciao",
-    "date": "Thu Apr 08 16:01:22 CEST 2021"
+    "subject": "pass",
+    "message": "",
+    "date": "Sat Apr 10 17:09:48 CEST 2021"
+  },
+  {
+    "ID": "1",
+    "sender": "raul@mail.com",
+    "addresses": [
+      "raul@mail.com"
+    ],
+    "subject": "mail11",
+    "message": "cc",
+    "date": "Sat Apr 10 17:10:34 CEST 2021"
   }
 ]

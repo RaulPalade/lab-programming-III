@@ -75,4 +75,12 @@ public class MailBox {
             Platform.runLater(() -> emailListReceived.addAll(emails));
         }
     }
+
+    public void deleteSendedEmail(Email email) {
+        emailListSended.remove(email);
+    }
+
+    public void deleteReceivedEmail(Email email) {
+        emailListReceived.remove(email);
+    }
 }

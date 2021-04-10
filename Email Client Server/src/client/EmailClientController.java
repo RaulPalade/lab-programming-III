@@ -3,26 +3,23 @@ package client;
 import common.Email;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 /**
  * @author Raul Palade
  * @project Email Client
  * @date 05/03/2021
  */
-public class EmailClientController implements Initializable, Serializable {
+public class EmailClientController implements Serializable {
     @FXML
     public HBox centerHBox;
 
@@ -60,22 +57,18 @@ public class EmailClientController implements Initializable, Serializable {
     private ListView<Email> listaEmailRicevute;
 
     @FXML
-    private Pane pannelloVuoto;
+    private StackPane pannelloVuoto;
+
     @FXML
     private Button logout;
+
     @FXML
     private TabPane tabPane;
 
     private MailBox mailBox;
     private Stage stage;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-    }
-
-
-    public void initModel(MailBox mailBox, Stage stage) {
+    public void initModel(MailBox mailBox, Stage stage) throws IOException {
         if (this.mailBox != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
@@ -87,19 +80,43 @@ public class EmailClientController implements Initializable, Serializable {
         listaEmailInviate.setItems(mailBox.getEmailListSended());
         listaEmailRicevute.setItems(mailBox.getEmailListReceived());
 
-        listaEmailInviate.setCellFactory(listView -> new ListCell<>() {
+        loadReadEmailWindow();
+
+        listaEmailRicevute.getSelectionModel().selectedItemProperty().addListener((observable, oldEmail, newEmail) ->
+                mailBox.setCurrentEmail(newEmail));
+
+        mailBox.currentEmailProperty().addListener((observable, oldEmail, newEmail) -> {
+            if (newEmail == null) {
+                listaEmailRicevute.getSelectionModel().clearSelection();
+            } else {
+                listaEmailRicevute.getSelectionModel().select(newEmail);
+            }
+        });
+
+        listaEmailInviate.getSelectionModel().selectedItemProperty().addListener((observable, oldEmail, newEmail) ->
+                mailBox.setCurrentEmail(newEmail));
+
+        mailBox.currentEmailProperty().addListener((observable, oldEmail, newEmail) -> {
+            if (newEmail == null) {
+                listaEmailInviate.getSelectionModel().clearSelection();
+            } else {
+                listaEmailInviate.getSelectionModel().select(newEmail);
+            }
+        });
+
+        listaEmailRicevute.setCellFactory(listView -> new ListCell<>() {
             @Override
             protected void updateItem(Email email, boolean empty) {
                 super.updateItem(email, empty);
                 if (empty) {
                     setText(null);
                 } else {
-                    setText(email.getSubject());
+                    setText(email.getSubject() + " " + email.getDate());
                 }
             }
         });
 
-        listaEmailRicevute.setCellFactory(listView -> new ListCell<>() {
+        listaEmailInviate.setCellFactory(listView -> new ListCell<>() {
             @Override
             protected void updateItem(Email email, boolean empty) {
                 super.updateItem(email, empty);
@@ -138,10 +155,10 @@ public class EmailClientController implements Initializable, Serializable {
     @FXML
     public void scriviNuovaEmail() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ScriviEmail.fxml"));
+        pannelloVuoto.getChildren().clear();
         pannelloVuoto.getChildren().add(loader.load());
         ScriviEmailController scriviEmailController = loader.getController();
         scriviEmailController.initModel(mailBox);
-        centerHBox.getChildren().remove(nuovaEmail);
     }
 
     @FXML
@@ -167,5 +184,14 @@ public class EmailClientController implements Initializable, Serializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    public void loadReadEmailWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/LeggiEmail.fxml"));
+        pannelloVuoto.getChildren().clear();
+        pannelloVuoto.getChildren().add(loader.load());
+        LeggiEmailController leggiEmailController = loader.getController();
+        leggiEmailController.initModel(mailBox, postaInArrivo, postaInviata);
     }
 }
