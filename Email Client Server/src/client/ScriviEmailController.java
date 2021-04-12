@@ -54,7 +54,7 @@ public class ScriviEmailController {
     }
 
     @FXML
-    public void handleInviaEmail(ActionEvent actionEvent) {
+    public void handleInviaEmail() {
         String[] emailSplit = destinatario.getText().toLowerCase().replaceAll("\\s+", "").split(";");
         ArrayList<String> listaEmail = new ArrayList<>(Arrays.asList(emailSplit));
         Alert alert;

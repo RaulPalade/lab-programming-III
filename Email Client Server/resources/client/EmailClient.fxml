@@ -3,9 +3,9 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefHeight="610.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1"
+      minWidth="-Infinity" prefHeight="610.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1"
       fx:controller="client.EmailClientController">
     <children>
         <GridPane alignment="CENTER">
@@ -35,16 +35,10 @@
                         <Insets left="10.0" right="10.0"/>
                     </HBox.margin>
                 </Button>
-                <Button fx:id="elimina" mnemonicParsing="false" onAction="#eliminaEmail" prefHeight="35.0"
-                        prefWidth="135.0" text="ELIMINA">
-                    <HBox.margin>
-                        <Insets/>
-                    </HBox.margin>
-                </Button>
                 <Button fx:id="nuovaEmail" mnemonicParsing="false" onAction="#scriviNuovaEmail" prefHeight="35.0"
                         prefWidth="579.0" text="NUOVA EMAIL" textAlignment="RIGHT">
                     <HBox.margin>
-                        <Insets left="20.0" right="10.0"/>
+                        <Insets left="160.0" right="10.0"/>
                     </HBox.margin>
                 </Button>
             </children>
@@ -59,20 +53,125 @@
             <children>
                 <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                        <Tab fx:id="postaInArrivo" text="Posta in Arrivo">
+                        <Tab fx:id="tabPostaInArrivo" text="Posta in Arrivo">
                             <content>
-                                <ListView fx:id="listaEmailRicevute" onMouseClicked="#loadReadEmailWindow"
-                                          prefHeight="500.0" prefWidth="300.0"/>
+                                <ListView fx:id="listaEmailRicevute" onMouseClicked="#loadEmails" prefHeight="500.0"
+                                          prefWidth="300.0"/>
                             </content>
                         </Tab>
-                        <Tab fx:id="postaInviata" text="Posta Inviata">
+                        <Tab fx:id="tabPostaInviata" text="Posta Inviata">
                             <content>
-                                <ListView fx:id="listaEmailInviate" prefHeight="500.0" prefWidth="300.0"/>
+                                <ListView fx:id="listaEmailInviate" onMouseClicked="#loadEmails" prefHeight="500.0"
+                                          prefWidth="300.0"/>
                             </content>
                         </Tab>
                     </tabs>
                 </TabPane>
-                <StackPane fx:id="pannelloVuoto" prefHeight="500.0" prefWidth="600.0"/>
+                <Pane fx:id="pannelloVuoto" prefHeight="500.0" prefWidth="600.0">
+                    <children>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                              prefHeight="500.0" prefWidth="600.0">
+                            <children>
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
+                                                           prefWidth="100.0"/>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
+                                                           prefWidth="100.0"/>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
+                                                           prefWidth="100.0"/>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0"
+                                                           prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <Button fx:id="elimina" mnemonicParsing="false" onAction="#eliminaEmail"
+                                                prefHeight="35.0" prefWidth="120.0" text="ELIMINA"/>
+                                        <Button fx:id="rispondi" mnemonicParsing="false" onAction="#rispondiEmail"
+                                                prefHeight="35.0" prefWidth="120.0" text="RISPONDI"
+                                                GridPane.columnIndex="1"/>
+                                        <Button fx:id="rispondiATutti" mnemonicParsing="false"
+                                                onAction="#rispondiEmailATutti" prefHeight="35.0" prefWidth="120.0"
+                                                text="RISPONDI A TUTTI" GridPane.columnIndex="2"/>
+                                        <Button fx:id="inoltra" mnemonicParsing="false" onAction="#inoltraEmail"
+                                                prefHeight="35.0" prefWidth="120.0" text="INOLTRA"
+                                                GridPane.columnIndex="3"/>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets left="10.0" right="10.0"/>
+                                    </VBox.margin>
+                                </GridPane>
+                                <GridPane hgap="10.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="292.0"
+                                                           minWidth="10.0" prefWidth="100.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="536.8" minWidth="10.0"
+                                                           prefWidth="536.8"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Mittente:">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label text="CC:" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label text="Oggetto:" GridPane.rowIndex="2">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label text="Data:" GridPane.rowIndex="3">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="mittente" text="Label" GridPane.columnIndex="1">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="cc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="oggetto" text="Label" GridPane.columnIndex="1"
+                                               GridPane.rowIndex="2">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="data" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets left="10.0" right="10.0" top="20.0"/>
+                                    </VBox.margin>
+                                </GridPane>
+                                <TextArea fx:id="testoEmail" prefHeight="298.0" prefWidth="592.0">
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                    </VBox.margin>
+                                </TextArea>
+                            </children>
+                        </VBox>
+                    </children>
+                </Pane>
             </children>
         </HBox>
     </children>

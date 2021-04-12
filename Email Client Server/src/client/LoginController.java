@@ -22,10 +22,6 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     @FXML
     private TextField email;
-
-    @FXML
-    private TextField password;
-
     @FXML
     private Button login;
 
@@ -67,7 +63,7 @@ public class LoginController implements Initializable {
 
     private boolean formCompilato() {
         boolean formCompilato = true;
-        TextField[] form = {email, password};
+        TextField[] form = {email};
 
         for (TextField t : form) {
             if (t.getText().isBlank()) {
@@ -81,7 +77,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void clear() {
-        TextField[] form = {email, password};
+        TextField[] form = {email};
         for (TextField t : form) {
             if (t.isFocused()) {
                 t.setStyle("-fx-text-box-border: #d0d0d0; -fx-focus-color: #d0d0d0;");
@@ -94,6 +90,5 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         email.setText("raul@mail.com");
-        password.setText("password");
     }
 }
