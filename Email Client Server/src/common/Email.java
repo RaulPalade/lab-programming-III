@@ -21,15 +21,15 @@ import java.util.Iterator;
 public class Email implements Serializable {
     private StringProperty ID = new SimpleStringProperty();
     private StringProperty sender = new SimpleStringProperty();
-    private ListProperty<String> addresses = new SimpleListProperty<>();
+    private ListProperty<String> cc = new SimpleListProperty<>();
     private StringProperty subject = new SimpleStringProperty();
     private StringProperty message = new SimpleStringProperty();
     private StringProperty date = new SimpleStringProperty();
 
-    public Email(String ID, String sender, ObservableList<String> addresses, String subject, String message, String date) {
+    public Email(String ID, String sender, ObservableList<String> cc, String subject, String message, String date) {
         this.ID.set(ID);
         this.sender.set(sender);
-        this.addresses.set(addresses);
+        this.cc.set(cc);
         this.subject.set(subject);
         this.message.set(message);
         this.date.set(date);
@@ -59,16 +59,16 @@ public class Email implements Serializable {
         return sender;
     }
 
-    public ObservableList<String> getAddresses() {
-        return addresses.get();
+    public ObservableList<String> getCc() {
+        return cc.get();
     }
 
-    public void setAddresses(ObservableList<String> addresses) {
-        this.addresses.set(addresses);
+    public void setCc(ObservableList<String> cc) {
+        this.cc.set(cc);
     }
 
-    public ListProperty<String> addressesProperty() {
-        return addresses;
+    public ListProperty<String> ccProperty() {
+        return cc;
     }
 
     public String getSubject() {
@@ -108,23 +108,23 @@ public class Email implements Serializable {
     }
 
     public String getStringAddresses() {
-        String s = "";
-        Iterator<String> it = addresses.iterator();
+        StringBuilder s = new StringBuilder();
+        Iterator<String> it = cc.iterator();
         while (it.hasNext()) {
-            s = s + it.next();
+            s.append(it.next());
             if (it.hasNext()) {
-                s = s + " ,";
+                s.append("; ");
             }
         }
 
-        return s;
+        return s.toString();
     }
 
     private void writeObject(ObjectOutputStream out) {
         try {
             out.writeObject(getID());
             out.writeObject(getSender());
-            writeListProp(out);
+            writeListProperty(out);
             out.writeObject(getSubject());
             out.writeObject(getMessage());
             out.writeObject(getDate());
@@ -137,7 +137,7 @@ public class Email implements Serializable {
         try {
             ID = new SimpleStringProperty((String) in.readObject());
             sender = new SimpleStringProperty((String) in.readObject());
-            addresses = new SimpleListProperty<>(readListProp(in));
+            cc = new SimpleListProperty<>(readListProperty(in));
             subject = new SimpleStringProperty((String) in.readObject());
             message = new SimpleStringProperty((String) in.readObject());
             date = new SimpleStringProperty((String) in.readObject());
@@ -146,7 +146,7 @@ public class Email implements Serializable {
         }
     }
 
-    private ListProperty<String> readListProp(ObjectInputStream in) {
+    private ListProperty<String> readListProperty(ObjectInputStream in) {
         ListProperty<String> listProperty = new SimpleListProperty<>(FXCollections.observableArrayList());
         try {
             int loop = in.readInt();
@@ -160,10 +160,10 @@ public class Email implements Serializable {
         return listProperty;
     }
 
-    private void writeListProp(ObjectOutputStream out) {
+    private void writeListProperty(ObjectOutputStream out) {
         try {
-            out.writeInt(addresses.size());
-            for (String elt : addresses.getValue()) {
+            out.writeInt(cc.size());
+            for (String elt : cc.getValue()) {
                 out.writeObject(elt);
             }
         } catch (IOException e) {
@@ -176,7 +176,7 @@ public class Email implements Serializable {
         return "Email{" +
                 "ID=" + ID +
                 ", sender=" + sender +
-                ", addresses=" + addresses +
+                ", cc=" + cc +
                 ", subject=" + subject +
                 ", message=" + message +
                 ", date=" + date +

@@ -29,7 +29,7 @@
         </GridPane>
         <HBox fx:id="centerHBox" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="900.0">
             <children>
-                <Button fx:id="aggiorna" mnemonicParsing="false" onAction="#aggiornaListaEmail" prefHeight="35.0"
+                <Button fx:id="aggiorna" mnemonicParsing="false" prefHeight="35.0"
                         prefWidth="135.0" text="AGGIORNA">
                     <HBox.margin>
                         <Insets left="10.0" right="10.0"/>

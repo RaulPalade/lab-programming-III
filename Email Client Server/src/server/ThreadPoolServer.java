@@ -6,46 +6,41 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static common.Utils.PORT;
+
 /**
  * @author Raul Palade
  * @project Email Server
  * @date 30/03/2021
  */
 public class ThreadPoolServer extends Thread implements Runnable {
-    private final DataModel dataModel;
-    private final ExecutorService pool = Executors.newSingleThreadExecutor();
-    private Socket socket;
+    private final ServerModel serverModel;
+    private final ExecutorService threadPool = Executors.newSingleThreadExecutor();
     private ServerSocket serverSocket;
 
-    public ThreadPoolServer(DataModel dataModel) {
-        this.dataModel = dataModel;
+    public ThreadPoolServer(ServerModel serverModel) {
+        this.serverModel = serverModel;
     }
 
     @Override
     public void run() {
-        System.out.println("RUN SERVER");
         try {
-            serverSocket = new ServerSocket(7777);
+            serverSocket = new ServerSocket(PORT);
             while (true) {
-                socket = serverSocket.accept();
-                System.out.println("ACCEPT");
-                pool.execute(new ServerTask(socket, dataModel));
+                try {
+                    Socket socket = serverSocket.accept();
+                    threadPool.execute(new ServerTask(socket, serverModel));
+                } catch (IOException e) {
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void stopServer() {
-        if (pool != null) {
-            pool.shutdown();
-        }
-        if (serverSocket != null) {
-            try {
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public void stopServer() throws IOException {
+        threadPool.shutdown();
+        serverSocket.close();
     }
 }

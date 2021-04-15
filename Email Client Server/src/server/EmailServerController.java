@@ -1,12 +1,11 @@
 package server;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -21,21 +20,21 @@ public class EmailServerController implements Initializable {
     private ListView<String> log;
 
     @FXML
-    private Button spegni;
+    private Button startStopServerButton;
 
-    private DataModel dataModel;
+    private ServerModel serverModel;
     private ThreadPoolServer threadPoolServer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (this.dataModel != null) {
+        if (this.serverModel != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
-        dataModel = new DataModel();
+        serverModel = new ServerModel();
         socketConnector();
 
         log.setEditable(false);
-        log.setItems(dataModel.getLog());
+        log.setItems(serverModel.getLog());
 
         log.setCellFactory(listView -> new ListCell<>() {
             @Override
@@ -51,20 +50,29 @@ public class EmailServerController implements Initializable {
     }
 
     @FXML
-    public void spegniServer(ActionEvent actionEvent) {
+    public void startStopServer() throws IOException {
         ButtonType si = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, null, si, no);
-        alert.setHeaderText("Sei sicuro di spegnere il server?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.orElse(no) == si) {
-            Stage stage = (Stage) spegni.getScene().getWindow();
-            stage.close();
+        if (startStopServerButton.getText().equalsIgnoreCase("SPEGNI SERVER")) {
+            alert.setHeaderText("Sei sicuro di voler spegnere il server?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.orElse(no) == si) {
+                startStopServerButton.setText("AVVIA SERVER");
+                threadPoolServer.stopServer();
+            }
+        } else if (startStopServerButton.getText().equalsIgnoreCase("AVVIA SERVER")) {
+            alert.setHeaderText("Sei sicuro di voler avviare il server?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.orElse(no) == si) {
+                startStopServerButton.setText("SPEGNI SERVER");
+                socketConnector();
+            }
         }
     }
 
     public void socketConnector() {
-        threadPoolServer = new ThreadPoolServer(dataModel);
+        threadPoolServer = new ThreadPoolServer(serverModel);
         threadPoolServer.start();
     }
 }

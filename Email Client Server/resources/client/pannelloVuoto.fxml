@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" fx:id="pannelloVuoto" prefHeight="500.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/15.0.1">
+   <children>
+      <Label layoutX="88.0" layoutY="235.0" text="Seleziona una mail oppure scrivi una nuova mail">
+         <font>
+            <Font size="20.0"/>
+         </font>
+      </Label>
+   </children>
+</Pane>

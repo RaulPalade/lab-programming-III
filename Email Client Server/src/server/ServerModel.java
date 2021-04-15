@@ -10,10 +10,10 @@ import java.io.Serializable;
  * @project Email Client Server
  * @date 03/04/2021
  */
-public class DataModel implements Serializable {
+public class ServerModel implements Serializable {
     private ObservableList<String> log;
 
-    public DataModel() {
+    public ServerModel() {
         log = FXCollections.observableArrayList();
     }
 

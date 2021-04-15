@@ -1,8 +1,8 @@
 package client;
 
+import common.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,17 +11,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @author Raul Palade
  * @project Email Client Server
  * @date 31/03/2021
  */
-public class LoginController implements Initializable {
+public class LoginController {
     @FXML
     private TextField email;
+
     @FXML
     private Button login;
 
@@ -45,13 +44,12 @@ public class LoginController implements Initializable {
                     Parent root = emailClient.load();
                     EmailClientController emailClientController = emailClient.getController();
                     emailClientController.initModel(mailBox, stage);
-                    emailClientController.aggiornaListaEmail();
                     s.setTitle("Email Client");
                     s.setScene(new Scene(root));
                     s.setResizable(false);
                     s.show();
                 } else {
-                    errore.setText("Login non riuscito");
+                    errore.setText("Login non riuscito, server offline");
                 }
             } else {
                 errore.setText("Formato Email incorretto");
@@ -85,10 +83,5 @@ public class LoginController implements Initializable {
                 errore.setStyle("-fx-text-box-border: #d0d0d0; -fx-focus-color: #d0d0d0;");
             }
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        email.setText("raul@mail.com");
     }
 }
