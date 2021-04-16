@@ -62,9 +62,9 @@ public class Connection {
             if (out != null) {
                 out.writeObject(LOGIN);
                 out.writeObject(email);
-                out.writeObject(mailBox.getUsername());
                 out.flush();
                 loginCorrect = (boolean) in.readObject();
+                System.out.println(loginCorrect);
             } else {
                 return false;
             }
@@ -109,10 +109,11 @@ public class Connection {
     }
 
     public String getEmailId() {
-        int id = -1;
+        int id = Integer.MIN_VALUE;
         try {
             out.writeObject(GET_EMAIL_ID);
             out.writeObject(mailBox.getUsername());
+            out.flush();
             id = (int) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -123,6 +124,7 @@ public class Connection {
         return String.valueOf(id);
     }
 
+    // TODO (1): Add boolean to control if sended correctly
     public void sendEmail(Email email) {
         try {
             out.writeObject(SEND_EMAIL);
@@ -136,14 +138,14 @@ public class Connection {
         }
     }
 
-    public String deleteEmail(Email email) {
-        String message = "";
+    public boolean deleteEmail(Email email) {
+        boolean deletedCorrectly = false;
         try {
             if (out != null) {
                 out.writeObject(DELETE_EMAIL);
                 out.writeObject(mailBox.getUsername());
                 out.writeObject(email);
-                message = (String) in.readObject();
+                deletedCorrectly = (boolean) in.readObject();
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -151,7 +153,7 @@ public class Connection {
             closeConnection();
         }
 
-        return message;
+        return deletedCorrectly;
     }
 
     public void loadReceivedEmails(int lastId) {

@@ -17,7 +17,7 @@ public class ThreadRefreshEmailList extends Thread {
         this.statoServer = statoServer;
     }
 
-    @SuppressWarnings("InfiniteLoopStatement")
+    @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
     @Override
     public void run() {
         boolean loggedIn = true;

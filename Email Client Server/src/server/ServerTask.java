@@ -1,12 +1,10 @@
 package server;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import common.Email;
 import common.Operation;
 import org.hildan.fxgson.FxGson;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -34,10 +31,7 @@ public class ServerTask implements Runnable {
     private final ArrayList<String> usernameList = new ArrayList<>();
     private final ArrayList<Email> receivedEmails = new ArrayList<>();
     private final ArrayList<Email> sendedEmails = new ArrayList<>();
-    private JsonArray jsonArray = null;
-    private JsonArray receivedJson = null;
-    private JsonArray emailJsonList = null;
-    private Iterator<JsonElement> iterator;
+    private JsonArray jsonArray = new JsonArray();
 
     public ServerTask(Socket clientSocket, ServerModel serverModel) {
         this.clientSocket = clientSocket;
@@ -57,25 +51,22 @@ public class ServerTask implements Runnable {
             int lastId;
             Operation operation = (Operation) in.readObject();
 
+            System.out.println(operation.toString());
+
             switch (operation) {
                 case LOGIN:
                     username = (String) in.readObject();
                     login(out, username);
-                    out.writeObject("OK");
-                    out.flush();
                     break;
 
                 case LOGOUT:
                     username = (String) in.readObject();
                     logout(username);
-                    out.writeObject("OK");
-                    out.flush();
                     break;
 
                 case CONTROL_USERNAME:
                     username = (String) in.readObject();
                     controlUsername(out, username);
-                    out.writeObject("OK");
                     break;
 
                 case GET_EMAIL_ID:
@@ -85,33 +76,25 @@ public class ServerTask implements Runnable {
                 case SEND_EMAIL:
                     username = (String) in.readObject();
                     email = (Email) in.readObject();
-                    sendEmail(email);
-                    out.writeObject("OK");
-                    serverModel.addToLog("<" + username + "> sent new email");
+                    sendEmail(email, username);
                     break;
 
                 case DELETE_EMAIL:
                     username = (String) in.readObject();
                     email = (Email) in.readObject();
-                    deleteEmail(email);
-                    out.writeObject("OK");
-                    serverModel.addToLog("Mail ID " + email.getID() + "deleted by <" + username + ">");
+                    deleteEmail(out, email, username);
                     break;
 
                 case LOAD_RECEIVED_EMAILS:
                     username = (String) in.readObject();
                     lastId = (int) in.readObject();
                     loadReceivedEmails(out, username, lastId);
-                    out.writeObject("OK");
-                    out.flush();
                     break;
 
                 case LOAD_SENDED_EMAILS:
                     username = (String) in.readObject();
                     lastId = (int) in.readObject();
                     loadSendedEmails(out, username, lastId);
-                    out.writeObject("OK");
-                    out.flush();
                     break;
 
                 default:
@@ -124,84 +107,48 @@ public class ServerTask implements Runnable {
 
     private void login(ObjectOutputStream out, String username) {
         try {
-            if (checkIfFileIsNull(new FileReader(fileUsers))) {
-                out.writeObject(false);
-            } else {
+            if (fileIsNull(new FileReader(fileUsers))) {
                 try {
-                    readLock.lock();
-                    jsonArray = (JsonArray) JsonParser.parseReader(new FileReader(fileUsers));
-                    iterator = jsonArray.iterator();
-                    while (iterator.hasNext()) {
-                        usernameList.add(iterator.next().toString());
-                    }
-                    readLock.unlock();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                boolean trovato = false;
-                for (String s : usernameList) {
-                    if (s.equals("\"" + username + "\"")) {
-                        trovato = true;
-                        break;
-                    }
-                }
-
-                if (trovato) {
-                    GregorianCalendar calendar = new GregorianCalendar();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-                    simpleDateFormat.setCalendar(calendar);
-                    String date = simpleDateFormat.format(calendar.getTime());
-                    serverModel.addToLog("<" + username + "> logged in at " + date);
-                }
-
-                try {
-                    out.writeObject(trovato);
+                    out.writeObject(false);
+                    out.flush();
+                    return;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    private void logout(String username) {
-        GregorianCalendar calendar = new GregorianCalendar();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-        simpleDateFormat.setCalendar(calendar);
-        String date = simpleDateFormat.format(calendar.getTime());
-        serverModel.addToLog("<" + username + "> logged out at " + date);
-    }
-
-    private void controlUsername(ObjectOutputStream out, String username) {
-        try {
-            readLock.lock();
-            jsonArray = (JsonArray) JsonParser.parseReader(new FileReader(fileUsers));
-            iterator = jsonArray.iterator();
-            while (iterator.hasNext()) {
-                usernameList.add(iterator.next().toString());
-            }
-            readLock.unlock();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        boolean trovato = false;
-        for (String s : usernameList) {
-            if (s.equals("\"" + username + "\"")) {
-                trovato = true;
-                break;
-            }
+        boolean userExists = checkUserEmail(username);
+
+        if (userExists) {
+            String date = getCurrentDate();
+            serverModel.addToLog("<" + username + "> logged in at " + date);
         }
 
-        if (trovato) {
+        try {
+            out.writeObject(userExists);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void logout(String username) {
+        String date = getCurrentDate();
+        serverModel.addToLog("<" + username + "> logged out at " + date);
+    }
+
+    private void controlUsername(ObjectOutputStream out, String username) {
+        if (fileIsNull(out, fileUsers)) return;
+        boolean userExists = checkUserEmail(username);
+        if (!userExists) {
             serverModel.addToLog(username + " not found");
         }
         try {
-            out.writeObject(trovato);
+            out.writeObject(userExists);
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -209,28 +156,48 @@ public class ServerTask implements Runnable {
 
     private void getEmailId(ObjectOutputStream out) {
         try {
+            if (fileIsNull(new FileReader(fileEmails))) {
+                try {
+                    out.writeObject(Integer.MIN_VALUE);
+                    out.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
             readLock.lock();
-            receivedJson = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
-            Gson gson = FxGson.coreBuilder().create();
-            Email[] emailList = gson.fromJson(receivedJson, Email[].class);
+            Email[] emailList = processFileEmails();
             readLock.unlock();
 
             int emailCounter = 0;
             if (emailList.length > 0) {
                 emailCounter = Integer.parseInt(emailList[emailList.length - 1].getID()) + 1;
             }
+
             out.writeObject(emailCounter);
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void sendEmail(Email email) {
+    private void sendEmail(Email email, String username) {
+        try {
+            if (fileIsNull(new FileReader(fileEmails))) return;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         try {
             readLock.lock();
-            emailJsonList = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
+            jsonArray = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
             Gson gson = FxGson.coreBuilder().setPrettyPrinting().create();
-            Email[] emailList = gson.fromJson(emailJsonList, Email[].class);
+            Email[] emailList = gson.fromJson(jsonArray, Email[].class);
             readLock.unlock();
 
             ArrayList<Email> toWrite = new ArrayList<>();
@@ -242,31 +209,42 @@ public class ServerTask implements Runnable {
             gson.toJson(toWrite.toArray(), file);
             file.close();
             writeLock.unlock();
+
+            serverModel.addToLog("<" + username + "> sent new email");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void deleteEmail(Email emailToDelete) {
+    private void deleteEmail(ObjectOutputStream out, Email emailToDelete, String username) {
+        if (fileIsNull(out, fileEmails)) return;
+
         try {
             readLock.lock();
-            receivedJson = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
+            jsonArray = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
             Gson gson = FxGson.coreBuilder().setPrettyPrinting().create();
-            Email[] emailList = gson.fromJson(receivedJson, Email[].class);
+            Email[] emailList = gson.fromJson(jsonArray, Email[].class);
             readLock.unlock();
 
             ArrayList<Email> toWrite = new ArrayList<>();
             FileWriter file = new FileWriter(fileEmails);
 
             writeLock.lock();
+            boolean deletedCorrectly = false;
             for (Email email : emailList) {
                 if (!email.getID().equals(emailToDelete.getID())) {
                     toWrite.add(email);
+                } else {
+                    deletedCorrectly = true;
+                    serverModel.addToLog("Mail ID " + email.getID() + " deleted by <" + username + ">");
                 }
             }
             gson.toJson(toWrite.toArray(), file);
             file.close();
             writeLock.unlock();
+
+            out.writeObject(deletedCorrectly);
+            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -275,10 +253,14 @@ public class ServerTask implements Runnable {
 
     private void loadReceivedEmails(ObjectOutputStream out, String username, int lastId) {
         try {
+            if (fileIsNull(new FileReader(fileEmails))) return;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
             readLock.lock();
-            emailJsonList = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
-            Gson gson = FxGson.coreBuilder().create();
-            Email[] emailList = gson.fromJson(emailJsonList, Email[].class);
+            Email[] emailList = processFileEmails();
             readLock.unlock();
             int i = 0;
             boolean newEmail = false;
@@ -300,6 +282,7 @@ public class ServerTask implements Runnable {
 
             for (Email email : receivedEmails) {
                 out.writeObject(email);
+                out.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -308,10 +291,14 @@ public class ServerTask implements Runnable {
 
     private void loadSendedEmails(ObjectOutputStream out, String username, int lastId) {
         try {
+            if (fileIsNull(new FileReader(fileEmails))) return;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
             readLock.lock();
-            emailJsonList = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
-            Gson gson = FxGson.coreBuilder().create();
-            Email[] emailList = gson.fromJson(emailJsonList, Email[].class);
+            Email[] emailList = processFileEmails();
             readLock.unlock();
 
             int i = 0;
@@ -327,13 +314,82 @@ public class ServerTask implements Runnable {
 
             for (Email email : sendedEmails) {
                 out.writeObject(email);
+                out.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private boolean checkIfFileIsNull(FileReader file) throws IOException {
-        return new BufferedReader(file).readLine() == null;
+    private Email[] processFileEmails() {
+        try {
+            jsonArray = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Gson gson = FxGson.coreBuilder().create();
+        return gson.fromJson(jsonArray, Email[].class);
+    }
+
+    @NotNull
+    private String getCurrentDate() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        simpleDateFormat.setCalendar(calendar);
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
+    private boolean checkUserEmail(String username) {
+        try {
+            readLock.lock();
+            jsonArray = (JsonArray) JsonParser.parseReader(new FileReader(fileUsers));
+            for (JsonElement jsonElement : jsonArray) {
+                usernameList.add(jsonElement.toString());
+            }
+            readLock.unlock();
+        } catch (JsonIOException | JsonSyntaxException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        boolean userExists = false;
+        for (String s : usernameList) {
+            if (s.equals("\"" + username + "\"")) {
+                userExists = true;
+                break;
+            }
+        }
+
+        return userExists;
+    }
+
+    private boolean fileIsNull(ObjectOutputStream out, File fileUsers) {
+        try {
+            if (fileIsNull(new FileReader(fileUsers))) {
+                try {
+                    out.writeObject(false);
+                    out.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean fileIsNull(FileReader file) {
+        try {
+            readLock.lock();
+            if (new BufferedReader(file).readLine() == null) {
+                readLock.unlock();
+                return true;
+            }
+            readLock.unlock();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

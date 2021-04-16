@@ -117,6 +117,16 @@ public class EmailClientController implements Serializable {
         });
 
         loadEmails();
+
+        ThreadRefreshEmailList threadRefreshEmailList = new ThreadRefreshEmailList(mailBox, statoServer);
+        try {
+            System.out.println("start");
+            threadRefreshEmailList.setDaemon(true);
+            threadRefreshEmailList.start();
+        } catch (Exception e) {
+            System.out.println("Interrupt");
+            threadRefreshEmailList.interrupt();
+        }
     }
 
     @FXML
@@ -170,15 +180,6 @@ public class EmailClientController implements Serializable {
                 data.setText(newEmail.getDate());
             }
         });
-
-        ThreadRefreshEmailList threadRefreshEmailList = new ThreadRefreshEmailList(mailBox, statoServer);
-        try {
-            System.out.println("start");
-            threadRefreshEmailList.start();
-        } catch (Exception e) {
-            System.out.println("Interrupt");
-            threadRefreshEmailList.interrupt();
-        }
     }
 
     @FXML
@@ -209,7 +210,6 @@ public class EmailClientController implements Serializable {
     @FXML
     public void scriviNuovaEmail() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ScriviEmail.fxml"));
-        nuovaEmail.setVisible(false);
         pannelloVuoto.getChildren().get(0).setVisible(false);
         pannelloVuoto.getChildren().add(loader.load());
         ScriviEmailController scriviEmailController = loader.getController();
@@ -227,13 +227,16 @@ public class EmailClientController implements Serializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.orElse(no) == si) {
                 Connection connection = new Connection(mailBox);
-                if (connection.deleteEmail(mailBox.getCurrentEmail()).equalsIgnoreCase("OK")) {
+                if (connection.deleteEmail(mailBox.getCurrentEmail())) {
                     if (tabPostaInArrivo.isSelected()) {
                         mailBox.deleteReceivedEmail(mailBox.getCurrentEmail());
                     } else if (tabPostaInviata.isSelected()) {
                         mailBox.deleteSendedEmail(mailBox.getCurrentEmail());
                     }
-                    nuovaEmail.setVisible(true);
+                } else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("Impossibile eliminare l'email al momento");
+                    alert.show();
                 }
             }
         }

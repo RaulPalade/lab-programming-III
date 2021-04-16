@@ -19,34 +19,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Merged EmailClientController and LeggiEmailController and changed read email layout">
-      <change afterPath="$PROJECT_DIR$/resources/client/pannelloVuoto.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/files/testEmails.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/ThreadRefreshEmailList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/Operation.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Implementati rispondi a tutti, inoltra, eliminato codice duplicato di Connection e creato metodo per verifica file nullo in ServerTask">
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/Connection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/Connection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClient.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClientController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/LeggiEmailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmailController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/Utils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/client/EmailClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/client/EmailClient.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/files/emails.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/files/emails.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/server/EmailServer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/server/EmailServer.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/EmailClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/EmailClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/LeggiEmailController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/ScriviEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ScriviEmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Email.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/DataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/EmailServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/EmailServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/ThreadRefreshEmailList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ThreadRefreshEmailList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/TestJSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/TestJSON.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ThreadPoolServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ThreadPoolServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +99,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/server/ServerTask.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectId" id="1qTeyA0MsZVAoR6ATUbh21MCS2Y" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -147,6 +134,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="last.edited.regexp" value="" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/lt.aff.txt" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -176,7 +164,7 @@
       <recent name="C:\Users\raulp\Documents\Universita\Laurea Triennale\Anno 3\Programmazione III\progetto-programmazione-iii-2020-2021\Email Client Server\src\server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestServer">
+  <component name="RunManager" selected="Application.TestClient">
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -250,17 +238,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -299,11 +276,14 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestClient" />
         <item itemvalue="Application.TestServer" />
         <item itemvalue="Application.TestJSON" />
-        <item itemvalue="Application.TestClient" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SliceToolwindowSettings">
+    <option name="autoScroll" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -341,7 +321,12 @@
       <workItem from="1618403176028" duration="857000" />
       <workItem from="1618473049503" duration="8086000" />
       <workItem from="1618481222548" duration="343000" />
-      <workItem from="1618488521146" duration="8033000" />
+      <workItem from="1618488521146" duration="8223000" />
+      <workItem from="1618561137670" duration="8007000" />
+      <workItem from="1618569878400" duration="412000" />
+      <workItem from="1618574659337" duration="6220000" />
+      <workItem from="1618581203623" duration="448000" />
+      <workItem from="1618581788108" duration="1523000" />
     </task>
     <task id="LOCAL-00001" summary="Merget client and server application, implemented login in client side">
       <created>1617368635529</created>
@@ -371,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618243663854</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Implementati rispondi a tutti, inoltra, eliminato codice duplicato di Connection e creato metodo per verifica file nullo in ServerTask">
+      <created>1618496746130</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618496746130</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,20 +403,25 @@
     <MESSAGE value="Implemented update emails, send email and logout" />
     <MESSAGE value="Aggiunta visualizzazione liste email con le informazioni e cancellazione in base al tab selezionato" />
     <MESSAGE value="Merged EmailClientController and LeggiEmailController and changed read email layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merged EmailClientController and LeggiEmailController and changed read email layout" />
+    <MESSAGE value="Implementati rispondi a tutti, inoltra, eliminato codice duplicato di Connection e creato metodo per verifica file nullo in ServerTask" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementati rispondi a tutti, inoltra, eliminato codice duplicato di Connection e creato metodo per verifica file nullo in ServerTask" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="90" key="#Inspections" timestamp="1618577736822">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="90" key="#Inspections/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618577736822" />
     <state x="223" y="38" width="1089" height="786" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617890033670">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="38" width="1089" height="786" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617890033670" />
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1618490910800">
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1618568155331">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618490910800" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618568155331" />
     <state x="498" y="226" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1617864642290">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -441,10 +438,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617889058699" />
-    <state x="138" y="0" key="CommitChangelistDialog2" timestamp="1618243663029">
+    <state x="138" y="0" key="CommitChangelistDialog2" timestamp="1618496745222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="138" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618243663029" />
+    <state x="138" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496745222" />
     <state x="564" y="282" key="DetectedRootsChooserDialog" timestamp="1617108304279">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -453,66 +450,70 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="721" y="117" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618481560721" />
-    <state width="1493" height="289" key="GridCell.Tab.0.bottom" timestamp="1618496578787">
+    <state width="1493" height="256" key="GridCell.Tab.0.bottom" timestamp="1618582629983">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="289" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496578787" />
+    <state width="1493" height="256" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618582629983" />
     <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="289" key="GridCell.Tab.0.center" timestamp="1618496578787">
+    <state width="1493" height="256" key="GridCell.Tab.0.center" timestamp="1618582629983">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="289" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496578787" />
+    <state width="1493" height="256" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618582629983" />
     <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="289" key="GridCell.Tab.0.left" timestamp="1618496578786">
+    <state width="1493" height="256" key="GridCell.Tab.0.left" timestamp="1618582629983">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="289" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496578786" />
+    <state width="1493" height="256" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618582629983" />
     <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="289" key="GridCell.Tab.0.right" timestamp="1618496578787">
+    <state width="1493" height="256" key="GridCell.Tab.0.right" timestamp="1618582629983">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="289" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496578787" />
+    <state width="1493" height="256" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618582629983" />
     <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1618569866605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1618569866605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
     <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1618569866605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
     <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1618569866605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
     <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1618569866606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866606" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1618569866605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
     <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1618569866605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
     <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1618496050488">
+    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1618569866606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496050488" />
+    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866606" />
     <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
+    <state x="584" y="346" key="ReplaceDuplicatesPrompt" timestamp="1618579866067">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="584" y="346" key="ReplaceDuplicatesPrompt/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618579866067" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1618489992499">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -521,34 +522,34 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="517" y="325" key="VCS.ChangelistChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617892706021" />
-    <state x="344" y="145" key="Vcs.Push.Dialog.v2" timestamp="1618243665228">
+    <state x="344" y="145" key="Vcs.Push.Dialog.v2" timestamp="1618496749245">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="344" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618243665228" />
+    <state x="344" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618496749245" />
     <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1617786134276">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617786134276" />
-    <state x="315" y="148" width="905" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1617802160028">
+    <state x="315" y="148" width="905" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1618569492884">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="315" y="148" width="905" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617802160028" />
-    <state x="2200" y="-15" width="1151" height="812" maximized="true" key="dock-window-1" timestamp="1618479534915">
+    <state x="315" y="148" width="905" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569492884" />
+    <state x="2088" y="-21" width="1120" height="812" maximized="true" key="dock-window-1" timestamp="1618575034727">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
-    <state x="2200" y="-15" width="1151" height="812" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618479534915" />
-    <state x="499" y="173" key="extract.method.dialog" timestamp="1618492865521">
+    <state x="2088" y="-21" width="1120" height="812" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618575034727" />
+    <state x="598" y="112" key="extract.method.dialog" timestamp="1618579863937">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="173" key="extract.method.dialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618492865521" />
-    <state x="479" y="11" width="578" height="801" key="find.popup" timestamp="1618391018194">
+    <state x="598" y="112" key="extract.method.dialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618579863937" />
+    <state x="479" y="11" width="578" height="801" key="find.popup" timestamp="1618576023329">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="479" y="11" width="578" height="801" key="find.popup/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618391018194" />
-    <state x="469" y="169" key="refactoring.ChangeSignatureDialog" timestamp="1618494425300">
+    <state x="479" y="11" width="578" height="801" key="find.popup/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618576023329" />
+    <state x="469" y="169" key="refactoring.ChangeSignatureDialog" timestamp="1618563120136">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="469" y="169" key="refactoring.ChangeSignatureDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618494425300" />
+    <state x="469" y="169" key="refactoring.ChangeSignatureDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618563120136" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1618319853877">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -560,6 +561,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" log-message="true" log-stack="true" type="java-exception">
+          <properties class="java.lang.ClassCastException" package="java.lang" />
+          <option name="timeStamp" value="4" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
