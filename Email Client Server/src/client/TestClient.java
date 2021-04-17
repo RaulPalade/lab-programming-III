@@ -19,7 +19,7 @@ public class TestClient extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/LoginClient.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/LoginClientLayout.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Email Client Login");
         Scene scene = new Scene(root);

@@ -25,7 +25,7 @@ public class ThreadRefreshEmailList extends Thread {
             try {
                 Connection connection = new Connection(mailBox);
                 if (!loggedIn) {
-                    boolean loaded = connection.login(mailBox.getUsername());
+                    boolean loaded = connection.login(mailBox.getUserEmail());
                     if (loaded) {
                         connection = new Connection(mailBox);
                         updateEmailList(connection);
@@ -53,8 +53,8 @@ public class ThreadRefreshEmailList extends Thread {
     }
 
     private void updateEmailList(Connection connection) {
-        connection.loadSendedEmails(mailBox.getLastIdSend());
+        connection.getSendedEmails(mailBox.getLastIdSend());
         connection = new Connection(mailBox);
-        connection.loadReceivedEmails(mailBox.getLastIdReceived());
+        connection.getReceivedEmails(mailBox.getLastIdReceived());
     }
 }

@@ -1,12 +1,115 @@
 [
   {
-    "ID": "0",
+    "ID": "2",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul.palade@edu.unito.it"
+    ],
+    "subject": "Prova2",
+    "message": "asdasd",
+    "date": "Sat Apr 17 16:51:06 CEST 2021"
+  },
+  {
+    "ID": "3",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul.palade@edu.unito.it"
+    ],
+    "subject": "asdasd",
+    "message": "asdsad",
+    "date": "Sat Apr 17 16:51:20 CEST 2021"
+  },
+  {
+    "ID": "5",
+    "sender": "raul.palade@edu.unito.it",
+    "cc": [
+      "raul@mail.com"
+    ],
+    "subject": "malxxxxxxxxx",
+    "message": "asdsad",
+    "date": "Sat Apr 17 16:51:59 CEST 2021"
+  },
+  {
+    "ID": "6",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul.palade@edu.unito.it"
+    ],
+    "subject": "Prova quasi finale",
+    "message": "asdasdasdas",
+    "date": "Sat Apr 17 16:55:18 CEST 2021"
+  },
+  {
+    "ID": "7",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul.palade@edu.unito.it"
+    ],
+    "subject": "Risolto?",
+    "message": "eh",
+    "date": "Sat Apr 17 16:57:06 CEST 2021"
+  },
+  {
+    "ID": "8",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul.palade@edu.unito.it",
+      "raul@mail.com"
+    ],
+    "subject": "Mail multipla",
+    "message": "asdasd",
+    "date": "Sat Apr 17 16:57:47 CEST 2021"
+  },
+  {
+    "ID": "9",
     "sender": "raul@mail.com",
     "cc": [
       "raul@mail.com"
     ],
-    "subject": "Prima mail nuova",
-    "message": "ciao",
-    "date": "Fri Apr 16 16:12:00 CEST 2021"
+    "subject": "asdasd",
+    "message": "asdsad",
+    "date": "Sat Apr 17 16:58:19 CEST 2021"
+  },
+  {
+    "ID": "10",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul@mail.com",
+      "raul.palade@edu.unito.it"
+    ],
+    "subject": "Blablabla",
+    "message": "bla",
+    "date": "Sat Apr 17 16:59:24 CEST 2021"
+  },
+  {
+    "ID": "11",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul.palade@edu.unito.it"
+    ],
+    "subject": "asdasd",
+    "message": "asdasdsad",
+    "date": "Sat Apr 17 16:59:42 CEST 2021"
+  },
+  {
+    "ID": "12",
+    "sender": "raul.palade@edu.unito.it",
+    "cc": [
+      "raul@mail.com"
+    ],
+    "subject": "Mail server offline",
+    "message": "ahahah",
+    "date": "Sat Apr 17 17:00:44 CEST 2021"
+  },
+  {
+    "ID": "13",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul@mail.com",
+      "raul.palade@edu.unito.it"
+    ],
+    "subject": "Mail final",
+    "message": "ciao, quasi finito 99%",
+    "date": "Sat Apr 17 17:23:29 CEST 2021"
   }
 ]

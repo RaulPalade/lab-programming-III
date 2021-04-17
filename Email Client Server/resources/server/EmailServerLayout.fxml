@@ -23,7 +23,8 @@
       </ListView>
       <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
          <children>
-            <Button fx:id="startStopServerButton" mnemonicParsing="false" onAction="#startStopServer" prefHeight="30.0"
+            <Button fx:id="startStopServerButton" mnemonicParsing="false" onAction="#startStopServer"
+                    prefHeight="30.0"
                     prefWidth="120.0"
                     text="SPEGNI SERVER">
                <HBox.margin>

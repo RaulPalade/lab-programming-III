@@ -3,7 +3,6 @@ package client;
 import common.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,15 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * @author Raul Palade
  * @project Email Client Server
  * @date 31/03/2021
  */
-public class LoginController implements Initializable {
+public class LoginController {
     @FXML
     private TextField email;
 
@@ -35,7 +32,7 @@ public class LoginController implements Initializable {
         Stage s = new Stage();
         boolean connectedCorrectly;
         errore.setStyle("-fx-border-color: #ff0033; -fx-background-color: #ffbaba;");
-        if (formCompilato()) {
+        if (formCompiled()) {
             if (Utils.validateEmail(email.getText().trim())) {
                 MailBox mailBox = new MailBox(email.getText());
                 Connection connection = new Connection(mailBox);
@@ -43,7 +40,7 @@ public class LoginController implements Initializable {
                 if (connectedCorrectly) {
                     Stage stage = (Stage) login.getScene().getWindow();
                     stage.close();
-                    FXMLLoader emailClient = new FXMLLoader(getClass().getResource("/client/EmailClient.fxml"));
+                    FXMLLoader emailClient = new FXMLLoader(getClass().getResource("/client/EmailClientLayout.fxml"));
                     Parent root = emailClient.load();
                     EmailClientController emailClientController = emailClient.getController();
                     emailClientController.initModel(mailBox, stage);
@@ -62,7 +59,7 @@ public class LoginController implements Initializable {
         }
     }
 
-    private boolean formCompilato() {
+    private boolean formCompiled() {
         boolean formCompilato = true;
         TextField[] form = {email};
 
@@ -77,7 +74,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void clear() {
+    private void clearErrors() {
         TextField[] form = {email};
         for (TextField t : form) {
             if (t.isFocused()) {
@@ -86,10 +83,5 @@ public class LoginController implements Initializable {
                 errore.setStyle("-fx-text-box-border: #d0d0d0; -fx-focus-color: #d0d0d0;");
             }
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        email.setText("raul@mail.com");
     }
 }

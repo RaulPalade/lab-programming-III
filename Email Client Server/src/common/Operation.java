@@ -8,10 +8,10 @@ package common;
 public enum Operation {
     LOGIN,
     LOGOUT,
-    CONTROL_USERNAME,
+    CHECK_IF_USER_EXISTS,
     GET_EMAIL_ID,
     SEND_EMAIL,
     DELETE_EMAIL,
-    LOAD_RECEIVED_EMAILS,
-    LOAD_SENDED_EMAILS
+    GET_RECEIVED_EMAILS,
+    GET_SENDED_EMAILS
 }

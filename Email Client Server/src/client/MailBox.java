@@ -15,23 +15,23 @@ import java.util.ArrayList;
  * @date 29/03/2021
  */
 public class MailBox {
-    private final transient String username;
+    private final transient String userEmail;
     private final transient ObservableList<Email> emailListSended;
     private final transient ObservableList<Email> emailListReceived;
     private final ObjectProperty<Email> currentEmail = new SimpleObjectProperty<>(null);
     private int lastIdReceived;
     private int lastIdSend;
 
-    public MailBox(String username) {
-        this.username = username;
+    public MailBox(String userEmail) {
+        this.userEmail = userEmail;
         emailListSended = FXCollections.observableArrayList();
         emailListReceived = FXCollections.observableArrayList();
         this.lastIdReceived = -1;
         this.lastIdSend = -1;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public ObservableList<Email> getEmailListSended() {

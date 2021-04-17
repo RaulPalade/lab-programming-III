@@ -59,12 +59,11 @@ public class Connection {
     public boolean login(String email) {
         boolean loginCorrect = false;
         try {
-            if (out != null) {
+            if (out != null && in != null) {
                 out.writeObject(LOGIN);
                 out.writeObject(email);
                 out.flush();
                 loginCorrect = (boolean) in.readObject();
-                System.out.println(loginCorrect);
             } else {
                 return false;
             }
@@ -91,14 +90,15 @@ public class Connection {
         }
     }
 
-    public boolean controlUsername(String username) {
+    public boolean checkIfUserExists(String userEmail) {
         boolean trovato = false;
         try {
-            out.writeObject(CONTROL_USERNAME);
-            out.writeObject(username);
-            out.writeObject(mailBox.getUsername());
-            out.flush();
-            trovato = (boolean) in.readObject();
+            if (out != null && in != null) {
+                out.writeObject(CHECK_IF_USER_EXISTS);
+                out.writeObject(userEmail);
+                out.flush();
+                trovato = (boolean) in.readObject();
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -111,10 +111,12 @@ public class Connection {
     public String getEmailId() {
         int id = Integer.MIN_VALUE;
         try {
-            out.writeObject(GET_EMAIL_ID);
-            out.writeObject(mailBox.getUsername());
-            out.flush();
-            id = (int) in.readObject();
+            if (out != null && in != null) {
+                out.writeObject(GET_EMAIL_ID);
+                out.writeObject(mailBox.getUserEmail());
+                out.flush();
+                id = (int) in.readObject();
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -124,26 +126,30 @@ public class Connection {
         return String.valueOf(id);
     }
 
-    // TODO (1): Add boolean to control if sended correctly
-    public void sendEmail(Email email) {
+    public boolean sendEmail(Email email) {
+        boolean sendedCorrectly = false;
         try {
-            out.writeObject(SEND_EMAIL);
-            out.writeObject(mailBox.getUsername());
-            out.writeObject(email);
-            out.flush();
-        } catch (IOException e) {
+            if (out != null && in != null) {
+                out.writeObject(SEND_EMAIL);
+                out.writeObject(mailBox.getUserEmail());
+                out.writeObject(email);
+                out.flush();
+                sendedCorrectly = (boolean) in.readObject();
+            }
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             closeConnection();
         }
+        return sendedCorrectly;
     }
 
     public boolean deleteEmail(Email email) {
         boolean deletedCorrectly = false;
         try {
-            if (out != null) {
+            if (out != null && in != null) {
                 out.writeObject(DELETE_EMAIL);
-                out.writeObject(mailBox.getUsername());
+                out.writeObject(mailBox.getUserEmail());
                 out.writeObject(email);
                 deletedCorrectly = (boolean) in.readObject();
             }
@@ -156,29 +162,31 @@ public class Connection {
         return deletedCorrectly;
     }
 
-    public void loadReceivedEmails(int lastId) {
-        ArrayList<Email> receivedEmails = getEmails(lastId, LOAD_RECEIVED_EMAILS);
+    public void getReceivedEmails(int lastId) {
+        ArrayList<Email> receivedEmails = getEmails(lastId, GET_RECEIVED_EMAILS);
         mailBox.addReceivedEmails(receivedEmails);
     }
 
-    public void loadSendedEmails(int lastId) {
-        ArrayList<Email> sendedEmails = getEmails(lastId, LOAD_SENDED_EMAILS);
+    public void getSendedEmails(int lastId) {
+        ArrayList<Email> sendedEmails = getEmails(lastId, GET_SENDED_EMAILS);
         mailBox.addSendedEmails(sendedEmails);
     }
 
     private ArrayList<Email> getEmails(int lastId, Operation operation) {
         ArrayList<Email> emails = new ArrayList<>();
         try {
-            out.writeObject(operation);
-            out.writeObject(mailBox.getUsername());
-            out.writeObject(lastId);
-            out.flush();
-            int controllo = (int) in.readObject();
-            while (controllo-- != 0) {
-                Object obj = in.readObject();
-                if (obj instanceof Email) {
-                    Email email = (Email) obj;
-                    emails.add(email);
+            if (out != null && in != null) {
+                out.writeObject(operation);
+                out.writeObject(mailBox.getUserEmail());
+                out.writeObject(lastId);
+                out.flush();
+                int controllo = (int) in.readObject();
+                while (controllo-- != 0) {
+                    Object obj = in.readObject();
+                    if (obj instanceof Email) {
+                        Email email = (Email) obj;
+                        emails.add(email);
+                    }
                 }
             }
         } catch (IOException | ClassNotFoundException e) {

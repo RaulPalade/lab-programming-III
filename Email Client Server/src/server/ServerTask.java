@@ -51,8 +51,6 @@ public class ServerTask implements Runnable {
             int lastId;
             Operation operation = (Operation) in.readObject();
 
-            System.out.println(operation.toString());
-
             switch (operation) {
                 case LOGIN:
                     username = (String) in.readObject();
@@ -64,9 +62,9 @@ public class ServerTask implements Runnable {
                     logout(username);
                     break;
 
-                case CONTROL_USERNAME:
+                case CHECK_IF_USER_EXISTS:
                     username = (String) in.readObject();
-                    controlUsername(out, username);
+                    checkIfUserExists(out, username);
                     break;
 
                 case GET_EMAIL_ID:
@@ -76,7 +74,7 @@ public class ServerTask implements Runnable {
                 case SEND_EMAIL:
                     username = (String) in.readObject();
                     email = (Email) in.readObject();
-                    sendEmail(email, username);
+                    sendEmail(out, email, username);
                     break;
 
                 case DELETE_EMAIL:
@@ -85,16 +83,16 @@ public class ServerTask implements Runnable {
                     deleteEmail(out, email, username);
                     break;
 
-                case LOAD_RECEIVED_EMAILS:
+                case GET_RECEIVED_EMAILS:
                     username = (String) in.readObject();
                     lastId = (int) in.readObject();
-                    loadReceivedEmails(out, username, lastId);
+                    getReceivedEmails(out, username, lastId);
                     break;
 
-                case LOAD_SENDED_EMAILS:
+                case GET_SENDED_EMAILS:
                     username = (String) in.readObject();
                     lastId = (int) in.readObject();
-                    loadSendedEmails(out, username, lastId);
+                    getSendedEmails(out, username, lastId);
                     break;
 
                 default:
@@ -140,7 +138,7 @@ public class ServerTask implements Runnable {
         serverModel.addToLog("<" + username + "> logged out at " + date);
     }
 
-    private void controlUsername(ObjectOutputStream out, String username) {
+    private void checkIfUserExists(ObjectOutputStream out, String username) {
         if (fileIsNull(out, fileUsers)) return;
         boolean userExists = checkUserEmail(username);
         if (!userExists) {
@@ -171,7 +169,7 @@ public class ServerTask implements Runnable {
 
         try {
             readLock.lock();
-            Email[] emailList = processFileEmails();
+            Email[] emailList = parseFileEmails();
             readLock.unlock();
 
             int emailCounter = 0;
@@ -186,12 +184,8 @@ public class ServerTask implements Runnable {
         }
     }
 
-    private void sendEmail(Email email, String username) {
-        try {
-            if (fileIsNull(new FileReader(fileEmails))) return;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    private void sendEmail(ObjectOutputStream out, Email email, String username) {
+        if (fileIsNull(out, fileEmails)) return;
 
         try {
             readLock.lock();
@@ -210,8 +204,15 @@ public class ServerTask implements Runnable {
             file.close();
             writeLock.unlock();
 
+            out.writeObject(true);
             serverModel.addToLog("<" + username + "> sent new email");
         } catch (IOException e) {
+            try {
+                out.writeObject(false);
+                out.flush();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
@@ -251,7 +252,7 @@ public class ServerTask implements Runnable {
 
     }
 
-    private void loadReceivedEmails(ObjectOutputStream out, String username, int lastId) {
+    private void getReceivedEmails(ObjectOutputStream out, String username, int lastId) {
         try {
             if (fileIsNull(new FileReader(fileEmails))) return;
         } catch (FileNotFoundException e) {
@@ -260,7 +261,7 @@ public class ServerTask implements Runnable {
 
         try {
             readLock.lock();
-            Email[] emailList = processFileEmails();
+            Email[] emailList = parseFileEmails();
             readLock.unlock();
             int i = 0;
             boolean newEmail = false;
@@ -289,7 +290,7 @@ public class ServerTask implements Runnable {
         }
     }
 
-    private void loadSendedEmails(ObjectOutputStream out, String username, int lastId) {
+    private void getSendedEmails(ObjectOutputStream out, String username, int lastId) {
         try {
             if (fileIsNull(new FileReader(fileEmails))) return;
         } catch (FileNotFoundException e) {
@@ -298,7 +299,7 @@ public class ServerTask implements Runnable {
 
         try {
             readLock.lock();
-            Email[] emailList = processFileEmails();
+            Email[] emailList = parseFileEmails();
             readLock.unlock();
 
             int i = 0;
@@ -321,7 +322,15 @@ public class ServerTask implements Runnable {
         }
     }
 
-    private Email[] processFileEmails() {
+    @NotNull
+    private String getCurrentDate() {
+        GregorianCalendar calendar = new GregorianCalendar();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        simpleDateFormat.setCalendar(calendar);
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
+    private Email[] parseFileEmails() {
         try {
             jsonArray = (JsonArray) JsonParser.parseReader(new FileReader(fileEmails));
         } catch (FileNotFoundException e) {
@@ -329,14 +338,6 @@ public class ServerTask implements Runnable {
         }
         Gson gson = FxGson.coreBuilder().create();
         return gson.fromJson(jsonArray, Email[].class);
-    }
-
-    @NotNull
-    private String getCurrentDate() {
-        GregorianCalendar calendar = new GregorianCalendar();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-        simpleDateFormat.setCalendar(calendar);
-        return simpleDateFormat.format(calendar.getTime());
     }
 
     private boolean checkUserEmail(String username) {

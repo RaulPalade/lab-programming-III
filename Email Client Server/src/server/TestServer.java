@@ -14,7 +14,7 @@ public class TestServer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader serverLoader = new FXMLLoader(getClass().getResource("/server/EmailServer.fxml"));
+        FXMLLoader serverLoader = new FXMLLoader(getClass().getResource("/server/EmailServerLayout.fxml"));
         Parent root = serverLoader.load();
         primaryStage.setTitle("Email Server");
         primaryStage.setScene(new Scene(root));

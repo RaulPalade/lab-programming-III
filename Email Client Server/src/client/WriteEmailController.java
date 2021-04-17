@@ -5,7 +5,10 @@ import common.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -18,21 +21,15 @@ import java.util.Optional;
  * @project Email Client
  * @date 05/03/2021
  */
-public class ScriviEmailController {
+public class WriteEmailController {
     @FXML
-    private TextArea destinatario;
+    private TextArea recipient;
 
     @FXML
-    private TextArea oggetto;
+    private TextArea subject;
 
     @FXML
-    private Button elimina;
-
-    @FXML
-    private Button invia;
-
-    @FXML
-    private TextArea testoEmail;
+    private TextArea message;
 
     private final ButtonType si = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
     private final ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -54,9 +51,9 @@ public class ScriviEmailController {
         }
         this.mailBox = mailBox;
         this.pane = pane;
-        destinatario.setText(mittente);
-        oggetto.setText(oggettoEmail);
-        testoEmail.setText(messaggio);
+        recipient.setText(mittente);
+        subject.setText(oggettoEmail);
+        message.setText(messaggio);
     }
 
     // INOLTRA
@@ -66,55 +63,63 @@ public class ScriviEmailController {
         }
         this.mailBox = mailBox;
         this.pane = pane;
-        testoEmail.setText(messaggio);
-        oggetto.setText(oggettoEmail);
-        testoEmail.setEditable(false);
+        message.setText(messaggio);
+        subject.setText(oggettoEmail);
+        message.setEditable(false);
     }
 
     @FXML
-    public void eliminaMailCorrente() {
+    public void deleteCurrectEmail() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, null, si, no);
         alert.setHeaderText("Sei sicuro di voler cancellare questa email?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.orElse(no) == si) {
-            pane.getChildren().remove(1);
             pane.getChildren().get(0).setVisible(true);
+            pane.getChildren().get(1).setVisible(false);
+            pane.getChildren().remove(2);
         }
     }
 
     @FXML
-    public void handleInviaEmail() {
-        String[] emailSplit = destinatario.getText().toLowerCase().replaceAll("\\s+", "").split(";");
-        ArrayList<String> listaEmail = new ArrayList<>(Arrays.asList(emailSplit));
+    public void sendEmail() {
+        String[] emailListSplitted = recipient.getText().toLowerCase().replaceAll("\\s+", "").split(";");
+        ArrayList<String> emailList = new ArrayList<>(Arrays.asList(emailListSplitted));
         Alert alert;
 
-        if (formCompilato()) {
-            if (emailValide(listaEmail)) {
+        if (formCompiled()) {
+            if (validEmails(emailList)) {
                 Connection connection = new Connection(mailBox);
                 String id = connection.getEmailId();
-                String mittente = mailBox.getUsername();
+                String sender = mailBox.getUserEmail();
                 ObservableList<String> list = FXCollections.observableArrayList();
-                list.addAll(emailSplit);
-                boolean correct = true;
-                for (String s : list) {
+                list.addAll(emailListSplitted);
+                boolean userEmailExists = true;
+                for (String userEmail : list) {
                     connection = new Connection(mailBox);
-                    if (!connection.controlUsername(s)) {
-                        correct = false;
+                    if (!connection.checkIfUserExists(userEmail)) {
+                        userEmailExists = false;
                     }
                 }
-                String oggettoEmail = oggetto.getText();
-                String messaggioEmail = testoEmail.getText();
+                String subject = this.subject.getText();
+                String message = this.message.getText();
                 GregorianCalendar date = new GregorianCalendar();
-                if (correct) {
+                if (userEmailExists) {
                     connection = new Connection(mailBox);
-                    Email email = new Email(id, mittente, list, oggettoEmail, messaggioEmail, date.getTime().toString());
-                    connection.sendEmail(email);
+                    Email email = new Email(id, sender, list, subject, message, date.getTime().toString());
+                    boolean sendedCorrectly = connection.sendEmail(email);
+                    if (sendedCorrectly) {
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Email inviata");
+                        alert.showAndWait();
+                        pane.getChildren().get(0).setVisible(true);
+                        pane.getChildren().get(1).setVisible(false);
+                        pane.getChildren().remove(2);
+                    } else {
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("Non è possibile inviare l'email al momento");
+                        alert.showAndWait();
+                    }
 
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText("Email inviata");
-                    alert.showAndWait();
-                    pane.getChildren().remove(1);
-                    pane.getChildren().get(0).setVisible(true);
                 } else {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText("Email inesistenti");
@@ -132,35 +137,35 @@ public class ScriviEmailController {
         }
     }
 
-    private boolean formCompilato() {
-        boolean formCompilato = true;
-        TextArea[] form = {destinatario, oggetto};
+    private boolean formCompiled() {
+        boolean formCompiled = true;
+        TextArea[] form = {recipient, subject};
 
         for (TextArea t : form) {
             if (t.getText().isBlank()) {
                 t.setStyle("-fx-text-box-border: #ff0033; -fx-focus-color: #ff0033;");
-                formCompilato = false;
+                formCompiled = false;
             }
         }
 
-        return formCompilato;
+        return formCompiled;
     }
 
-    private boolean emailValide(ArrayList<String> listaEmail) {
-        boolean emailValide = false;
+    private boolean validEmails(ArrayList<String> emails) {
+        boolean validEmails = false;
 
-        for (String email : listaEmail) {
+        for (String email : emails) {
             if (Utils.validateEmail(email)) {
-                emailValide = true;
+                validEmails = true;
             }
         }
 
-        return emailValide;
+        return validEmails;
     }
 
     @FXML
     private void clear() {
-        TextArea[] form = {destinatario, oggetto};
+        TextArea[] form = {recipient, subject};
         for (TextArea t : form) {
             if (t.isFocused()) {
                 t.setStyle("-fx-text-box-border: #d0d0d0; -fx-focus-color: #d0d0d0;");

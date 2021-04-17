@@ -39,14 +39,6 @@ public class Email implements Serializable {
         return ID.get();
     }
 
-    public void setID(String ID) {
-        this.ID.set(ID);
-    }
-
-    public StringProperty IDProperty() {
-        return ID;
-    }
-
     public String getSender() {
         return sender.get();
     }
@@ -55,44 +47,16 @@ public class Email implements Serializable {
         this.sender.set(sender);
     }
 
-    public StringProperty senderProperty() {
-        return sender;
-    }
-
     public ObservableList<String> getCc() {
         return cc.get();
-    }
-
-    public void setCc(ObservableList<String> cc) {
-        this.cc.set(cc);
-    }
-
-    public ListProperty<String> ccProperty() {
-        return cc;
     }
 
     public String getSubject() {
         return subject.get();
     }
 
-    public void setSubject(String subject) {
-        this.subject.set(subject);
-    }
-
-    public StringProperty subjectProperty() {
-        return subject;
-    }
-
     public String getMessage() {
         return message.get();
-    }
-
-    public void setMessage(String message) {
-        this.message.set(message);
-    }
-
-    public StringProperty messageProperty() {
-        return message;
     }
 
     public String getDate() {
@@ -101,10 +65,6 @@ public class Email implements Serializable {
 
     public void setDate(String date) {
         this.date.set(date);
-    }
-
-    public StringProperty dateProperty() {
-        return date;
     }
 
     public String getStringAddresses() {

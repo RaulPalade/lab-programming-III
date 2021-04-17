@@ -14,7 +14,7 @@
     <children>
         <ImageView fitHeight="150.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../img/Login.png"/>
+                <Image url="@../img/login.png"/>
             </image>
         </ImageView>
 
@@ -32,7 +32,7 @@
                         <Font size="14.0"/>
                     </font>
                 </Label>
-                <TextField fx:id="email" onMouseClicked="#clear" prefHeight="40.0" prefWidth="297.0"
+                <TextField fx:id="email" onMouseClicked="#clearErrors" prefHeight="40.0" prefWidth="297.0"
                            GridPane.columnIndex="1"/>
             </children>
             <VBox.margin>
@@ -58,7 +58,7 @@
                 <Insets top="40.0"/>
             </VBox.margin>
             <image>
-                <Image url="@../img/PEC.png"/>
+                <Image url="@../img/email_logo.png"/>
             </image>
         </ImageView>
 

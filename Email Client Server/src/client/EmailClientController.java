@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,104 +20,66 @@ import java.util.Optional;
  * @date 05/03/2021
  */
 public class EmailClientController implements Serializable {
+    private final Label startLabel = new Label("Seleziona una mail o scrivi una nuova email");
     private final ButtonType si = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
-    private final ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label statoServer;
-
-    @FXML
-    private HBox centerHBox;
-
-    @FXML
-    private Button aggiorna;
-
-    @FXML
-    private Button nuovaEmail;
-
-    @FXML
-    private HBox bottomHBox;
 
     @FXML
     private Button logout;
-
-    @FXML
-    private TabPane tabPane;
 
     @FXML
     private ListView<Email> listaEmailInviate;
 
     @FXML
     private ListView<Email> listaEmailRicevute;
-
+    private final ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
     @FXML
-    private Tab tabPostaInArrivo;
-
+    private Label userEmail;
     @FXML
-    private Tab tabPostaInviata;
-
+    private Label serverStatus;
     @FXML
-    private Pane pannelloVuoto;
-
-    @FXML
-    private Button elimina;
-
-    @FXML
-    private Button rispondi;
-
-    @FXML
-    private Button rispondiATutti;
-
-    @FXML
-    private Button inoltra;
-
-    @FXML
-    private Label mittente;
+    private Tab tabReceivedEmails;
 
     @FXML
     private Label cc;
-
     @FXML
-    private Label oggetto;
-
+    private Tab tabSendedEmails;
     @FXML
-    private Label data;
-
+    private Pane emptyPane;
     @FXML
-    private TextArea testoEmail;
-
-    private final Label labelIniziale = new Label("Seleziona una mail o scrivi una nuova email");
+    private Label sender;
+    @FXML
+    private Label subject;
+    @FXML
+    private Label date;
+    @FXML
+    private TextArea message;
 
     private MailBox mailBox;
 
-    public void initModel(MailBox mailBox, Stage stage) throws IOException {
+    public void initModel(MailBox mailBox, Stage stage) {
         if (this.mailBox != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.mailBox = mailBox;
         this.mailBox.setCurrentEmail(null);
-        email.setText(mailBox.getUsername());
-        statoServer.setText("controllo...");
+        userEmail.setText(mailBox.getUserEmail());
         listaEmailInviate.setItems(mailBox.getEmailListSended());
         listaEmailRicevute.setItems(mailBox.getEmailListReceived());
-        pannelloVuoto.getChildren().get(0).setVisible(false);
-        labelIniziale.setLayoutX(88);
-        labelIniziale.setLayoutY(235);
-        labelIniziale.setStyle("-fx-font-size: 20px");
-        pannelloVuoto.getChildren().add(labelIniziale);
+        emptyPane.getChildren().get(0).setVisible(false);
+        startLabel.setLayoutX(88);
+        startLabel.setLayoutY(235);
+        startLabel.setStyle("-fx-font-size: 20px");
+        emptyPane.getChildren().add(startLabel);
 
         stage.setOnCloseRequest(event -> {
             Connection connection = new Connection(mailBox);
-            connection.logout(mailBox.getUsername());
+            connection.logout(mailBox.getUserEmail());
             stage.close();
         });
 
         loadEmails();
 
-        ThreadRefreshEmailList threadRefreshEmailList = new ThreadRefreshEmailList(mailBox, statoServer);
+        ThreadRefreshEmailList threadRefreshEmailList = new ThreadRefreshEmailList(mailBox, serverStatus);
         try {
             System.out.println("start");
             threadRefreshEmailList.setDaemon(true);
@@ -146,38 +107,41 @@ public class EmailClientController implements Serializable {
         }
 
         listaEmailRicevute.getSelectionModel().selectedItemProperty().addListener((observable, oldEmail, newEmail) -> {
-            if (pannelloVuoto.getChildren().contains(labelIniziale)) {
-                pannelloVuoto.getChildren().remove(labelIniziale);
-                pannelloVuoto.getChildren().get(0).setVisible(true);
+            if (emptyPane.getChildren().contains(startLabel)) {
+                emptyPane.getChildren().get(0).setVisible(true);
+                emptyPane.getChildren().get(1).setVisible(false);
             }
             mailBox.setCurrentEmail(newEmail);
         });
 
         listaEmailInviate.getSelectionModel().selectedItemProperty().addListener((observable, oldEmail, newEmail) -> {
-            if (pannelloVuoto.getChildren().contains(labelIniziale)) {
-                pannelloVuoto.getChildren().remove(labelIniziale);
-                pannelloVuoto.getChildren().get(0).setVisible(true);
+            if (emptyPane.getChildren().contains(startLabel)) {
+                emptyPane.getChildren().get(0).setVisible(true);
+                emptyPane.getChildren().get(1).setVisible(false);
             }
             mailBox.setCurrentEmail(newEmail);
         });
 
         mailBox.currentEmailProperty().addListener((observable, oldEmail, newEmail) -> {
             if (oldEmail != null) {
-                mittente.setText(oldEmail.getSender());
-                oggetto.setText(oldEmail.getSubject());
-                testoEmail.setText(oldEmail.getMessage());
-                data.setText(oldEmail.getDate());
+                sender.setText(oldEmail.getSender());
+                cc.setText(oldEmail.getStringAddresses());
+                subject.setText(oldEmail.getSubject());
+                message.setText(oldEmail.getMessage());
+                date.setText(oldEmail.getDate());
             }
             if (newEmail == null) {
-                mittente.setText("");
-                oggetto.setText("");
-                testoEmail.setText("");
-                data.setText("");
+                sender.setText("");
+                cc.setText("");
+                subject.setText("");
+                message.setText("");
+                date.setText("");
             } else {
-                mittente.setText(newEmail.getSender());
-                oggetto.setText(newEmail.getSubject());
-                testoEmail.setText(newEmail.getMessage());
-                data.setText(newEmail.getDate());
+                sender.setText(newEmail.getSender());
+                cc.setText(newEmail.getStringAddresses());
+                subject.setText(newEmail.getSubject());
+                message.setText(newEmail.getMessage());
+                date.setText(newEmail.getDate());
             }
         });
     }
@@ -189,11 +153,11 @@ public class EmailClientController implements Serializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.orElse(no) == si) {
             Connection connection = new Connection(mailBox);
-            connection.logout(mailBox.getUsername());
+            connection.logout(mailBox.getUserEmail());
             Stage stage = (Stage) logout.getScene().getWindow();
             stage.close();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/LoginClient.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/LoginClientLayout.fxml"));
                 Stage primaryStage = new Stage();
                 Parent root = loader.load();
                 primaryStage.setTitle("Email Client Login");
@@ -208,16 +172,20 @@ public class EmailClientController implements Serializable {
     }
 
     @FXML
-    public void scriviNuovaEmail() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ScriviEmail.fxml"));
-        pannelloVuoto.getChildren().get(0).setVisible(false);
-        pannelloVuoto.getChildren().add(loader.load());
-        ScriviEmailController scriviEmailController = loader.getController();
-        scriviEmailController.initModel(mailBox, pannelloVuoto);
+    public void writeNewEmail() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/WriteEmailLayout.fxml"));
+        if (emptyPane.getChildren().get(0).isVisible()) {
+            emptyPane.getChildren().get(0).setVisible(false);
+        } else if (emptyPane.getChildren().get(0).isDisabled()) {
+            emptyPane.getChildren().get(1).setVisible(false);
+        }
+        emptyPane.getChildren().add(loader.load());
+        WriteEmailController writeEmailController = loader.getController();
+        writeEmailController.initModel(mailBox, emptyPane);
     }
 
     @FXML
-    public void eliminaEmail() {
+    public void deleteSelectedEmail() {
         if (mailBox.getCurrentEmail() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.show();
@@ -228,9 +196,9 @@ public class EmailClientController implements Serializable {
             if (result.orElse(no) == si) {
                 Connection connection = new Connection(mailBox);
                 if (connection.deleteEmail(mailBox.getCurrentEmail())) {
-                    if (tabPostaInArrivo.isSelected()) {
+                    if (tabReceivedEmails.isSelected()) {
                         mailBox.deleteReceivedEmail(mailBox.getCurrentEmail());
-                    } else if (tabPostaInviata.isSelected()) {
+                    } else if (tabSendedEmails.isSelected()) {
                         mailBox.deleteSendedEmail(mailBox.getCurrentEmail());
                     }
                 } else {
@@ -243,44 +211,43 @@ public class EmailClientController implements Serializable {
     }
 
     @FXML
-    public void rispondiEmail() throws IOException {
-        String mittente = mailBox.getCurrentEmail().getSender();
-        String testoEmail = mailBox.getCurrentEmail().getMessage() + "\n------------------";
-        String oggettoEmail = mailBox.getCurrentEmail().getSubject();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ScriviEmail.fxml"));
-        pannelloVuoto.getChildren().get(0).setVisible(false);
-        pannelloVuoto.getChildren().add(loader.load());
-        ScriviEmailController scriviEmailController = loader.getController();
-        scriviEmailController.initModel(mailBox, pannelloVuoto, mittente, testoEmail, oggettoEmail);
+    public void replyEmail() throws IOException {
+        String recipient = mailBox.getCurrentEmail().getSender();
+        String message = mailBox.getCurrentEmail().getMessage() + "\n------------------";
+        String subject = mailBox.getCurrentEmail().getSubject();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/WriteEmailLayout.fxml"));
+        emptyPane.getChildren().get(0).setVisible(false);
+        emptyPane.getChildren().add(loader.load());
+        WriteEmailController writeEmailController = loader.getController();
+        writeEmailController.initModel(mailBox, emptyPane, recipient, message, subject);
     }
 
     @FXML
-    public void rispondiEmailATutti() throws IOException {
+    public void replyAllEmail() throws IOException {
         String[] cc = mailBox.getCurrentEmail().getCc().toArray(new String[0]);
-        String destinatario = Arrays.toString(cc).replace(",", ";").replace("[", "").replace("]", "");
-        System.out.println(destinatario);
-        String testoEmail = mailBox.getCurrentEmail().getMessage() + "\n------------------";
-        String oggettoEmail = mailBox.getCurrentEmail().getSubject();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ScriviEmail.fxml"));
-        pannelloVuoto.getChildren().get(0).setVisible(false);
-        pannelloVuoto.getChildren().add(loader.load());
-        ScriviEmailController scriviEmailController = loader.getController();
-        scriviEmailController.initModel(mailBox, pannelloVuoto, destinatario, testoEmail, oggettoEmail);
+        String recipient = Arrays.toString(cc).replace(",", ";").replace("[", "").replace("]", "");
+        String message = mailBox.getCurrentEmail().getMessage() + "\n------------------";
+        String subject = mailBox.getCurrentEmail().getSubject();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/WriteEmailLayout.fxml"));
+        emptyPane.getChildren().get(0).setVisible(false);
+        emptyPane.getChildren().add(loader.load());
+        WriteEmailController writeEmailController = loader.getController();
+        writeEmailController.initModel(mailBox, emptyPane, recipient, message, subject);
     }
 
     @FXML
-    public void inoltraEmail() throws IOException {
-        String testoEmail = "------Messaggio inoltrato------\n" +
+    public void forward() throws IOException {
+        String message = "------Messaggio inoltrato------\n" +
                 "Da: <" + mailBox.getCurrentEmail().getSender() + ">\n" +
                 "Data: " + mailBox.getCurrentEmail().getDate() + "\n" +
                 "Oggetto: " + mailBox.getCurrentEmail().getSubject() + "\n" +
                 "A: " + mailBox.getCurrentEmail().getStringAddresses() + "\n\n" +
                 mailBox.getCurrentEmail().getMessage();
-        String oggettoEmail = "Fwd: " + mailBox.getCurrentEmail().getSubject();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/ScriviEmail.fxml"));
-        pannelloVuoto.getChildren().get(0).setVisible(false);
-        pannelloVuoto.getChildren().add(loader.load());
-        ScriviEmailController scriviEmailController = loader.getController();
-        scriviEmailController.initModel(mailBox, pannelloVuoto, testoEmail, oggettoEmail);
+        String subject = "Fwd: " + mailBox.getCurrentEmail().getSubject();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/WriteEmailLayout.fxml"));
+        emptyPane.getChildren().get(0).setVisible(false);
+        emptyPane.getChildren().add(loader.load());
+        WriteEmailController writeEmailController = loader.getController();
+        writeEmailController.initModel(mailBox, emptyPane, message, subject);
     }
 }
