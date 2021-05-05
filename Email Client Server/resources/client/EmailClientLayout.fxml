@@ -55,13 +55,13 @@
                     <tabs>
                         <Tab fx:id="tabReceivedEmails" text="Posta in Arrivo">
                             <content>
-                                <ListView fx:id="listaEmailRicevute" onMouseClicked="#loadEmails" prefHeight="500.0"
+                                <ListView fx:id="listaEmailRicevute" prefHeight="500.0"
                                           prefWidth="300.0"/>
                             </content>
                         </Tab>
                         <Tab fx:id="tabSendedEmails" text="Posta Inviata">
                             <content>
-                                <ListView fx:id="listaEmailInviate" onMouseClicked="#loadEmails" prefHeight="500.0"
+                                <ListView fx:id="listaEmailInviate" prefHeight="500.0"
                                           prefWidth="300.0"/>
                             </content>
                         </Tab>

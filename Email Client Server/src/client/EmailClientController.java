@@ -22,23 +22,20 @@ import java.util.Optional;
 public class EmailClientController implements Serializable {
     private final Label startLabel = new Label("Seleziona una mail o scrivi una nuova email");
     private final ButtonType si = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
+    private final ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
     @FXML
     private Button logout;
-
     @FXML
     private ListView<Email> listaEmailInviate;
-
     @FXML
     private ListView<Email> listaEmailRicevute;
-    private final ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
     @FXML
     private Label userEmail;
     @FXML
     private Label serverStatus;
     @FXML
     private Tab tabReceivedEmails;
-
     @FXML
     private Label cc;
     @FXML
@@ -71,27 +68,6 @@ public class EmailClientController implements Serializable {
         startLabel.setStyle("-fx-font-size: 20px");
         emptyPane.getChildren().add(startLabel);
 
-        stage.setOnCloseRequest(event -> {
-            Connection connection = new Connection(mailBox);
-            connection.logout(mailBox.getUserEmail());
-            stage.close();
-        });
-
-        loadEmails();
-
-        ThreadRefreshEmailList threadRefreshEmailList = new ThreadRefreshEmailList(mailBox, serverStatus);
-        try {
-            System.out.println("start");
-            threadRefreshEmailList.setDaemon(true);
-            threadRefreshEmailList.start();
-        } catch (Exception e) {
-            System.out.println("Interrupt");
-            threadRefreshEmailList.interrupt();
-        }
-    }
-
-    @FXML
-    private void loadEmails() {
         for (ListView<Email> emailListView : Arrays.asList(listaEmailRicevute, listaEmailInviate)) {
             emailListView.setCellFactory(listView -> new ListCell<>() {
                 @Override
@@ -144,6 +120,22 @@ public class EmailClientController implements Serializable {
                 date.setText(newEmail.getDate());
             }
         });
+
+        stage.setOnCloseRequest(event -> {
+            Connection connection = new Connection(mailBox);
+            connection.logout(mailBox.getUserEmail());
+            stage.close();
+        });
+
+
+        ThreadRefreshEmailList threadRefreshEmailList = new ThreadRefreshEmailList(mailBox, serverStatus);
+        try {
+            System.out.println("start");
+            threadRefreshEmailList.start();
+        } catch (Exception e) {
+            System.out.println("Interrupt");
+            threadRefreshEmailList.interrupt();
+        }
     }
 
     @FXML

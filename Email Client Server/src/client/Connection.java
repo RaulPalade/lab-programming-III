@@ -26,9 +26,6 @@ public class Connection {
 
     public Connection(MailBox mailBox) {
         this.mailBox = mailBox;
-        socket = null;
-        out = null;
-        in = null;
         try {
             socket = new Socket(IP, PORT);
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -59,7 +56,7 @@ public class Connection {
     public boolean login(String email) {
         boolean loginCorrect = false;
         try {
-            if (out != null && in != null) {
+            if (out != null) {
                 out.writeObject(LOGIN);
                 out.writeObject(email);
                 out.flush();
@@ -175,18 +172,16 @@ public class Connection {
     private ArrayList<Email> getEmails(int lastId, Operation operation) {
         ArrayList<Email> emails = new ArrayList<>();
         try {
-            if (out != null && in != null) {
-                out.writeObject(operation);
-                out.writeObject(mailBox.getUserEmail());
-                out.writeObject(lastId);
-                out.flush();
-                int controllo = (int) in.readObject();
-                while (controllo-- != 0) {
-                    Object obj = in.readObject();
-                    if (obj instanceof Email) {
-                        Email email = (Email) obj;
-                        emails.add(email);
-                    }
+            out.writeObject(operation);
+            out.writeObject(mailBox.getUserEmail());
+            out.writeObject(lastId);
+            out.flush();
+            int controllo = (int) in.readObject();
+            while (controllo-- != 0) {
+                Object obj = in.readObject();
+                if (obj instanceof Email) {
+                    Email email = (Email) obj;
+                    emails.add(email);
                 }
             }
         } catch (IOException | ClassNotFoundException e) {

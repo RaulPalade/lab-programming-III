@@ -19,37 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Implementato il controllo sul file nullo ed eliminate tutte le porzioni di codice duplicato di ServerTask">
-      <change afterPath="$PROJECT_DIR$/resources/client/EmailClientLayout.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Eliminate tutte le porzioni di codice duplicato dell'interfaccia grafica, cambiato nomi operazioni e tradotti in inglese tutte le variabili">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/Connection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/Connection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClient.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClientController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/EmailClientController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmail.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/ScriviEmailController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Email Client Server/client/TestClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Email Client Server/client/TestClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/client/EmailClient.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/client/LoginClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/client/LoginClientLayout.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/client/ScriviEmail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/client/WriteEmailLayout.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/client/pannelloVuoto.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/client/EmailClientLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/client/EmailClientLayout.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/files/emails.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/files/emails.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/files/testEmails.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/Login.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/login.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/PEC.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/img/email_logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/server/EmailServer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/server/EmailServerLayout.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/EmailClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/EmailClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/MailBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/MailBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/ScriviEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/WriteEmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/TestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/TestClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/ThreadRefreshEmailList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ThreadRefreshEmailList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Email.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Operation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ServerTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/TestJSON.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/TestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/TestServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/WriteEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/WriteEmailController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +126,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -243,19 +223,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -345,7 +312,11 @@
       <workItem from="1618581788108" duration="2004000" />
       <workItem from="1618650493110" duration="570000" />
       <workItem from="1618651071328" duration="2655000" />
-      <workItem from="1618666695326" duration="6061000" />
+      <workItem from="1618666695326" duration="6223000" />
+      <workItem from="1619602992264" duration="7000" />
+      <workItem from="1619603991099" duration="11000" />
+      <workItem from="1619605177863" duration="79000" />
+      <workItem from="1620192169832" duration="5619000" />
     </task>
     <task id="LOCAL-00001" summary="Merget client and server application, implemented login in client side">
       <created>1617368635529</created>
@@ -389,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618583622895</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Eliminate tutte le porzioni di codice duplicato dell'interfaccia grafica, cambiato nomi operazioni e tradotti in inglese tutte le variabili">
+      <created>1618673107500</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1618673107500</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,12 +377,12 @@
     <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
+    <option name="COLUMN_ID_ORDER">
       <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
       </list>
     </option>
   </component>
@@ -431,156 +409,11 @@
     <MESSAGE value="Merged EmailClientController and LeggiEmailController and changed read email layout" />
     <MESSAGE value="Implementati rispondi a tutti, inoltra, eliminato codice duplicato di Connection e creato metodo per verifica file nullo in ServerTask" />
     <MESSAGE value="Implementato il controllo sul file nullo ed eliminate tutte le porzioni di codice duplicato di ServerTask" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementato il controllo sul file nullo ed eliminate tutte le porzioni di codice duplicato di ServerTask" />
+    <MESSAGE value="Eliminate tutte le porzioni di codice duplicato dell'interfaccia grafica, cambiato nomi operazioni e tradotti in inglese tutte le variabili" />
+    <option name="LAST_COMMIT_MESSAGE" value="Eliminate tutte le porzioni di codice duplicato dell'interfaccia grafica, cambiato nomi operazioni e tradotti in inglese tutte le variabili" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="395" y="90" key="#Inspections" timestamp="1618577736822">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="395" y="90" key="#Inspections/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618577736822" />
-    <state x="223" y="0" width="1089" height="824" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618672965904">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="223" y="0" width="1089" height="824" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618672965904" />
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1618568155331">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618568155331" />
-    <state x="498" y="226" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1617864642290">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="498" y="226" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617864642290" />
-    <state x="551" y="306" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1617191863471">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="551" y="306" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617191863471" />
-    <state x="368" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1618653510985">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="368" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618653510985" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617889058699">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617889058699" />
-    <state x="2050" y="124" key="CommitChangelistDialog2" timestamp="1618583621659">
-      <screen x="1920" y="0" width="1680" height="1010" />
-    </state>
-    <state x="2050" y="124" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618583621659" />
-    <state x="564" y="282" key="DetectedRootsChooserDialog" timestamp="1617108304279">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="564" y="282" key="DetectedRootsChooserDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617108304279" />
-    <state x="721" y="117" key="FileChooserDialogImpl" timestamp="1618481560721">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="721" y="117" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618481560721" />
-    <state width="1493" height="325" key="GridCell.Tab.0.bottom" timestamp="1618672540171">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="325" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618672540171" />
-    <state width="1493" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="325" key="GridCell.Tab.0.center" timestamp="1618672540170">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="325" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618672540170" />
-    <state width="1493" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="325" key="GridCell.Tab.0.left" timestamp="1618672540170">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="325" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618672540170" />
-    <state width="1493" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="325" key="GridCell.Tab.0.right" timestamp="1618672540170">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="325" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618672540170" />
-    <state width="1493" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1618569866605">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1618569866605">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1618569866605">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685167" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1618569866605">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1618569866606">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866606" />
-    <state width="1493" height="261" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.center" timestamp="1618569866605">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
-    <state width="1493" height="261" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.left" timestamp="1618569866605">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866605" />
-    <state width="1493" height="261" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state width="1493" height="261" key="GridCell.Tab.2.right" timestamp="1618569866606">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569866606" />
-    <state width="1493" height="261" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1617808685168" />
-    <state x="584" y="346" key="ReplaceDuplicatesPrompt" timestamp="1618579866067">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="584" y="346" key="ReplaceDuplicatesPrompt/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618579866067" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1618489992499">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618489992499" />
-    <state x="517" y="325" key="VCS.ChangelistChooser" timestamp="1617892706021">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="517" y="325" key="VCS.ChangelistChooser/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617892706021" />
-    <state x="344" y="145" key="Vcs.Push.Dialog.v2" timestamp="1618583625131">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="344" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618583625131" />
-    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1617786134276">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1617786134276" />
-    <state x="315" y="148" width="905" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1618569492884">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="315" y="148" width="905" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618569492884" />
-    <state x="1980" y="-14" width="1124" height="812" maximized="true" key="dock-window-1" timestamp="1618651118679">
-      <screen x="1920" y="0" width="1680" height="1010" />
-    </state>
-    <state x="1980" y="-14" width="1124" height="812" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618651118679" />
-    <state x="598" y="112" key="extract.method.dialog" timestamp="1618652722955">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="598" y="112" key="extract.method.dialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618652722955" />
-    <state x="479" y="11" width="578" height="801" key="find.popup" timestamp="1618672928890">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="479" y="11" width="578" height="801" key="find.popup/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618672928890" />
-    <state x="469" y="169" key="refactoring.ChangeSignatureDialog" timestamp="1618563120136">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="469" y="169" key="refactoring.ChangeSignatureDialog/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618563120136" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1618319853877">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1680.1010@0.0.1536.824" timestamp="1618319853877" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

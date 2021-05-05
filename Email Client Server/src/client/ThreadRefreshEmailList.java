@@ -1,6 +1,7 @@
 package client;
 
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 
 /**
@@ -10,11 +11,11 @@ import javafx.scene.control.Label;
  */
 public class ThreadRefreshEmailList extends Thread {
     private final MailBox mailBox;
-    private final Label statoServer;
+    private final Label serverStatus;
 
-    public ThreadRefreshEmailList(MailBox mailBox, Label statoServer) {
+    public ThreadRefreshEmailList(MailBox mailBox, Label serverStatus) {
         this.mailBox = mailBox;
-        this.statoServer = statoServer;
+        this.serverStatus = serverStatus;
     }
 
     @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
@@ -30,17 +31,27 @@ public class ThreadRefreshEmailList extends Thread {
                         connection = new Connection(mailBox);
                         updateEmailList(connection);
                         loggedIn = true;
-                        Platform.runLater(() -> statoServer.setText("Server Online"));
+                        Platform.runLater(() -> {
+                            serverStatus.setText("Server Online");
+                            Alert serverOnlineAlert = new Alert(Alert.AlertType.INFORMATION);
+                            serverOnlineAlert.setHeaderText("Il server è tornato online, è possibile eseguire qualsiasi operazione");
+                            serverOnlineAlert.show();
+                        });
                     } else {
                         loggedIn = false;
                     }
                 } else {
-                    Platform.runLater(() -> statoServer.setText("Server Online"));
+                    Platform.runLater(() -> serverStatus.setText("Server Online"));
                     updateEmailList(connection);
                 }
             } catch (Exception e) {
                 loggedIn = false;
-                Platform.runLater(() -> statoServer.setText("Server Offline"));
+                Platform.runLater(() -> {
+                    serverStatus.setText("Server Offline");
+                    Alert serverOfflineAlert = new Alert(Alert.AlertType.ERROR);
+                    serverOfflineAlert.setHeaderText("Server offline, non è possibile eseguire alcuna operazione");
+                    serverOfflineAlert.show();
+                });
                 e.printStackTrace();
             }
 

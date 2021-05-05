@@ -10,16 +10,6 @@
     "date": "Sat Apr 17 16:51:06 CEST 2021"
   },
   {
-    "ID": "3",
-    "sender": "raul@mail.com",
-    "cc": [
-      "raul.palade@edu.unito.it"
-    ],
-    "subject": "asdasd",
-    "message": "asdsad",
-    "date": "Sat Apr 17 16:51:20 CEST 2021"
-  },
-  {
     "ID": "5",
     "sender": "raul.palade@edu.unito.it",
     "cc": [
@@ -50,27 +40,6 @@
     "date": "Sat Apr 17 16:57:06 CEST 2021"
   },
   {
-    "ID": "8",
-    "sender": "raul@mail.com",
-    "cc": [
-      "raul.palade@edu.unito.it",
-      "raul@mail.com"
-    ],
-    "subject": "Mail multipla",
-    "message": "asdasd",
-    "date": "Sat Apr 17 16:57:47 CEST 2021"
-  },
-  {
-    "ID": "9",
-    "sender": "raul@mail.com",
-    "cc": [
-      "raul@mail.com"
-    ],
-    "subject": "asdasd",
-    "message": "asdsad",
-    "date": "Sat Apr 17 16:58:19 CEST 2021"
-  },
-  {
     "ID": "10",
     "sender": "raul@mail.com",
     "cc": [
@@ -80,16 +49,6 @@
     "subject": "Blablabla",
     "message": "bla",
     "date": "Sat Apr 17 16:59:24 CEST 2021"
-  },
-  {
-    "ID": "11",
-    "sender": "raul@mail.com",
-    "cc": [
-      "raul.palade@edu.unito.it"
-    ],
-    "subject": "asdasd",
-    "message": "asdasdsad",
-    "date": "Sat Apr 17 16:59:42 CEST 2021"
   },
   {
     "ID": "12",
@@ -111,5 +70,55 @@
     "subject": "Mail final",
     "message": "ciao, quasi finito 99%",
     "date": "Sat Apr 17 17:23:29 CEST 2021"
+  },
+  {
+    "ID": "14",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul@mail.com"
+    ],
+    "subject": "acacs",
+    "message": "ascasc",
+    "date": "Wed Apr 28 12:20:17 CEST 2021"
+  },
+  {
+    "ID": "15",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul@mail.com"
+    ],
+    "subject": "Prova2",
+    "message": "asdasd\n------------------\nrisposta",
+    "date": "Wed May 05 07:25:27 CEST 2021"
+  },
+  {
+    "ID": "17",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul@mail.com"
+    ],
+    "subject": "giorno prima dell\u0027esame",
+    "message": "",
+    "date": "Wed May 05 08:22:04 CEST 2021"
+  },
+  {
+    "ID": "18",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul@mail.com"
+    ],
+    "subject": "ora?",
+    "message": "ccc",
+    "date": "Wed May 05 08:43:45 CEST 2021"
+  },
+  {
+    "ID": "19",
+    "sender": "raul@mail.com",
+    "cc": [
+      "raul@mail.com"
+    ],
+    "subject": "asdasd",
+    "message": "asdads",
+    "date": "Wed May 05 08:44:04 CEST 2021"
   }
 ]

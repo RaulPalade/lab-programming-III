@@ -44,28 +44,44 @@ public class WriteEmailController {
         this.pane = pane;
     }
 
-    // RISPONDI
-    public void initModel(MailBox mailBox, Pane pane, String mittente, String messaggio, String oggettoEmail) {
+
+    /**
+     * Reply Email Contructor
+     *
+     * @param mailBox
+     * @param pane
+     * @param recipient
+     * @param message
+     * @param subject
+     */
+    public void initModel(MailBox mailBox, Pane pane, String recipient, String message, String subject) {
         if (this.mailBox != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.mailBox = mailBox;
         this.pane = pane;
-        recipient.setText(mittente);
-        subject.setText(oggettoEmail);
-        message.setText(messaggio);
+        this.recipient.setText(recipient);
+        this.subject.setText(subject);
+        this.message.setText(message);
     }
 
-    // INOLTRA
-    public void initModel(MailBox mailBox, Pane pane, String messaggio, String oggettoEmail) {
+    /**
+     * Forward Constructor
+     *
+     * @param mailBox
+     * @param pane
+     * @param message
+     * @param subject
+     */
+    public void initModel(MailBox mailBox, Pane pane, String message, String subject) {
         if (this.mailBox != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.mailBox = mailBox;
         this.pane = pane;
-        message.setText(messaggio);
-        subject.setText(oggettoEmail);
-        message.setEditable(false);
+        this.message.setText(message);
+        this.subject.setText(subject);
+        this.message.setEditable(false);
     }
 
     @FXML
