@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -216,15 +217,17 @@ public class EmailClientController implements Serializable {
 
     @FXML
     public void replyAllEmail() throws IOException {
-        String[] cc = mailBox.getCurrentEmail().getCc().toArray(new String[0]);
-        String recipient = Arrays.toString(cc).replace(",", ";").replace("[", "").replace("]", "");
+        ArrayList<String> cc = new ArrayList<>(mailBox.getCurrentEmail().getCc());
+        cc.remove(mailBox.getUserEmail());
+        cc.add(mailBox.getCurrentEmail().getSender());
+        String recipient1 = String.join("; ", cc);
         String message = mailBox.getCurrentEmail().getMessage() + "\n------------------";
         String subject = mailBox.getCurrentEmail().getSubject();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/WriteEmailLayout.fxml"));
         emptyPane.getChildren().get(0).setVisible(false);
         emptyPane.getChildren().add(loader.load());
         WriteEmailController writeEmailController = loader.getController();
-        writeEmailController.initModel(mailBox, emptyPane, recipient, message, subject);
+        writeEmailController.initModel(mailBox, emptyPane, recipient1, message, subject);
     }
 
     @FXML
