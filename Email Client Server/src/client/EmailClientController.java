@@ -172,9 +172,11 @@ public class EmailClientController implements Serializable {
         } else if (emptyPane.getChildren().get(0).isDisabled()) {
             emptyPane.getChildren().get(1).setVisible(false);
         }
+        tabReceivedEmails.setDisable(true);
+        tabSendedEmails.setDisable(true);
         emptyPane.getChildren().add(loader.load());
         WriteEmailController writeEmailController = loader.getController();
-        writeEmailController.initModel(mailBox, emptyPane);
+        writeEmailController.initModel(mailBox, emptyPane, tabReceivedEmails, tabSendedEmails);
     }
 
     @FXML
@@ -212,7 +214,9 @@ public class EmailClientController implements Serializable {
         emptyPane.getChildren().get(0).setVisible(false);
         emptyPane.getChildren().add(loader.load());
         WriteEmailController writeEmailController = loader.getController();
-        writeEmailController.initModel(mailBox, emptyPane, recipient, message, subject);
+        tabReceivedEmails.setDisable(true);
+        tabSendedEmails.setDisable(true);
+        writeEmailController.initModel(mailBox, emptyPane, recipient, message, subject, tabReceivedEmails, tabSendedEmails);
     }
 
     @FXML
@@ -227,7 +231,9 @@ public class EmailClientController implements Serializable {
         emptyPane.getChildren().get(0).setVisible(false);
         emptyPane.getChildren().add(loader.load());
         WriteEmailController writeEmailController = loader.getController();
-        writeEmailController.initModel(mailBox, emptyPane, recipient1, message, subject);
+        tabReceivedEmails.setDisable(true);
+        tabSendedEmails.setDisable(true);
+        writeEmailController.initModel(mailBox, emptyPane, recipient1, message, subject, tabReceivedEmails, tabSendedEmails);
     }
 
     @FXML
@@ -243,6 +249,8 @@ public class EmailClientController implements Serializable {
         emptyPane.getChildren().get(0).setVisible(false);
         emptyPane.getChildren().add(loader.load());
         WriteEmailController writeEmailController = loader.getController();
-        writeEmailController.initModel(mailBox, emptyPane, message, subject);
+        tabReceivedEmails.setDisable(true);
+        tabSendedEmails.setDisable(true);
+        writeEmailController.initModel(mailBox, emptyPane, message, subject, tabReceivedEmails, tabSendedEmails);
     }
 }

@@ -5,10 +5,7 @@ import common.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -35,13 +32,17 @@ public class WriteEmailController {
     private final ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
     private MailBox mailBox;
     private Pane pane;
+    private Tab tabReceivedEmails;
+    private Tab tabSendedEmails;
 
-    public void initModel(MailBox mailBox, Pane pane) {
+    public void initModel(MailBox mailBox, Pane pane, Tab tabReceivedEmails, Tab tabSendedEmails) {
         if (this.mailBox != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.mailBox = mailBox;
         this.pane = pane;
+        this.tabReceivedEmails = tabReceivedEmails;
+        this.tabSendedEmails = tabSendedEmails;
     }
 
 
@@ -54,12 +55,14 @@ public class WriteEmailController {
      * @param message
      * @param subject
      */
-    public void initModel(MailBox mailBox, Pane pane, String recipient, String message, String subject) {
+    public void initModel(MailBox mailBox, Pane pane, String recipient, String message, String subject, Tab tabReceivedEmails, Tab tabSendedEmails) {
         if (this.mailBox != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.mailBox = mailBox;
         this.pane = pane;
+        this.tabReceivedEmails = tabReceivedEmails;
+        this.tabSendedEmails = tabSendedEmails;
         this.recipient.setText(recipient);
         this.subject.setText(subject);
         this.message.setText(message);
@@ -73,12 +76,14 @@ public class WriteEmailController {
      * @param message
      * @param subject
      */
-    public void initModel(MailBox mailBox, Pane pane, String message, String subject) {
+    public void initModel(MailBox mailBox, Pane pane, String message, String subject, Tab tabReceivedEmails, Tab tabSendedEmails) {
         if (this.mailBox != null) {
             throw new IllegalStateException("Model can only be initialized once");
         }
         this.mailBox = mailBox;
         this.pane = pane;
+        this.tabReceivedEmails = tabReceivedEmails;
+        this.tabSendedEmails = tabSendedEmails;
         this.message.setText(message);
         this.subject.setText(subject);
         this.message.setEditable(false);
@@ -93,6 +98,8 @@ public class WriteEmailController {
             pane.getChildren().get(0).setVisible(true);
             pane.getChildren().get(1).setVisible(false);
             pane.getChildren().remove(2);
+            tabReceivedEmails.setDisable(false);
+            tabSendedEmails.setDisable(false);
         }
     }
 
@@ -130,6 +137,8 @@ public class WriteEmailController {
                         pane.getChildren().get(0).setVisible(true);
                         pane.getChildren().get(1).setVisible(false);
                         pane.getChildren().remove(2);
+                        tabReceivedEmails.setDisable(false);
+                        tabSendedEmails.setDisable(false);
                     } else {
                         alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText("Non è possibile inviare l'email al momento");
